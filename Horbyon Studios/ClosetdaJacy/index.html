@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Closet da Jacy - Loja Virtual</title>
+  <!-- Importar as novas fontes -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <!-- Adicionar meta descrição para SEO -->
+  <meta name="description"
+    content="Descubra as últimas tendências da moda feminina no Closet da Jacy. Vestidos, calças, blazers e muito mais com estilo e qualidade.">
+</head>
+
+<body>
+
+  <!-- TOPO -->
+  <header class="topo">
+    <div class="logo">
+      <img src="./Imagens/logoclosetjacy.png" alt="Logo Closet da Jacy" />
+    </div>
+
+    <!-- Menu Desktop -->
+    <nav>
+      <ul class="menu-desktop">
+        <li><a href="index.html">Início</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropbtn">Produtos ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="#" data-categoria="calca">Calça</a></li>
+            <li><a href="#" data-categoria="sandalias">Sandálias</a></li>
+            <li><a href="#" data-categoria="sutia">Sutiã</a></li>
+            <li><a href="#" data-categoria="body">Body</a></li>
+            <li><a href="#" data-categoria="blusa">Blusa Manga-longa</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Ações Mobile (Hambúrguer + Carrinho) -->
+    <div class="acoes-mobile">
+      <button id="abrir-carrinho" title="Carrinho">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="contador-carrinho"></span>
+      </button>
+      <button class="menu-toggle" id="abrir-menu">&#9776;</button>
+    </div>
+  </header>
+
+  <!-- Menu Lateral Mobile -->
+  <nav id="menu-lateral" class="side-menu">
+    <button class="fechar-menu" id="fechar-menu">&times;</button>
+    <a href="index.html">Início</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
+  <!-- PRODUTOS -->
+  <section class="produtos">
+    <div class="produto">
+      <img src="./Imagens/vestidofloral.jpg" alt="Vestido Floral" />
+      <h3>Vestido Floral</h3>
+      <p class="descricao">Vestido leve e elegante com estampa floral vibrante.</p>
+      <p>R$ 129,90</p>
+      <button>Comprar</button>
+    </div>
+    <div class="produto">
+      <img src="./Imagens/calçawidecargojeans.jpg" alt="Calça Wide Cargo Jeans" />
+      <h3>Calça Wide Cargo Jeans</h3>
+      <p class="descricao">Calça jeans cargo com modelagem wide leg, moderna e confortável.</p>
+      <p>R$ 89,90</p>
+      <button>Comprar</button>
+    </div>
+    <div class="produto">
+      <img src="./Imagens/body.jpg" alt="Body" />
+      <h3>Body</h3>
+      <p class="descricao">Body versátil em tecido macio, ideal para diversas combinações.</p>
+      <p>R$ 49,90</p>
+      <button>Comprar</button>
+    </div>
+    <div class="produto">
+      <img src="./Imagens/blazerdealfaiataria.avif" alt="Blazer de Alfaiataria" />
+      <h3>Blazer de Alfaiataria</h3>
+      <p class="descricao">Blazer clássico de alfaiataria, peça chave para um look sofisticado.</p>
+      <p>R$ 64,90</p>
+      <button>Comprar</button>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Atendimento</h4>
+        <p>📞 (84) 9 9705-0106</p>
+        <p>✉️ closetdajacy@gmail.com</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Institucional</h4>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Trocas e Devoluções</a>
+        <a href="#">Prazo de Entrega</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>Redes Sociais</h4>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/jacy_oliveira_makeup" target="_blank" class="Instagram"
+            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2024 Closet da Jacy. Todos os direitos reservados. Desenvolvido pela HORBYON.
+    </div>
+  </footer>
+
+  <!-- SCRIPT DO MENU E CARRINHO -->
+  <script src="script.js"></script>
+  <script src="carrinho.js"></script>
+
+</body>
+
+</html>

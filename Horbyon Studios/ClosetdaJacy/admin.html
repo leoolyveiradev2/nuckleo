@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel Admin - Adicionar Produto</title>
+</head>
+<body>
+  <h1>Adicionar Produto</h1>
+  <form id="formProduto">
+    <label>Nome:<br /><input type="text" name="nome" required /></label><br /><br />
+    <label>Descrição:<br /><textarea name="descricao" required></textarea></label><br /><br />
+    <label>Preço:<br /><input type="number" name="preco" step="0.01" required /></label><br /><br />
+    <label>Imagem:<br /><input type="file" name="imagem" accept="image/*" /></label><br /><br />
+    <button type="submit">Salvar Produto</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('formProduto');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      try {
+        const res = await fetch('http://localhost:3000/produtos', {
+          method: 'POST',
+          body: formData,
+        });
+        if (res.ok) {
+          alert('Produto adicionado com sucesso!');
+          form.reset();
+        } else {
+          alert('Erro ao adicionar produto');
+        }
+      } catch (err) {
+        alert('Erro: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>
