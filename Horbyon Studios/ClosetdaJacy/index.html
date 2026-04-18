@@ -6,99 +6,395 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Closet da Jacy - Loja Virtual</title>
-  <!-- Importar as novas fontes -->
+  <title>Closet da Jacy</title>
+  <link rel="icon" href="Imagens/favicon.ico" type="image/x-icon">
   <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Jost:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <!-- Adicionar meta descrição para SEO -->
   <meta name="description"
     content="Descubra as últimas tendências da moda feminina no Closet da Jacy. Vestidos, calças, blazers e muito mais com estilo e qualidade.">
 </head>
 
 <body>
 
+  <!-- BARRA DE ANÚNCIO -->
+  <div class="announce-bar">✦ Nova coleção disponível &nbsp;|&nbsp; Não Cobramos Frete ✦</div>
+
   <!-- TOPO -->
   <header class="topo">
     <div class="logo">
-      <img src="./Imagens/logoclosetjacy.png" alt="Logo Closet da Jacy" />
+      <a href="./index.html"><img src="./Imagens/logoclosetjacy.png" alt="Logo Closet da Jacy" /></a>
     </div>
 
-    <!-- Menu Desktop -->
     <nav>
-      <ul class="menu-desktop">
-        <li><a href="index.html">Início</a></li>
 
-        <li class="dropdown">
-          <a href="#" class="dropbtn">Produtos ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="#" data-categoria="calca">Calça</a></li>
-            <li><a href="#" data-categoria="sandalias">Sandálias</a></li>
-            <li><a href="#" data-categoria="sutia">Sutiã</a></li>
-            <li><a href="#" data-categoria="body">Body</a></li>
-            <li><a href="#" data-categoria="blusa">Blusa Manga-longa</a></li>
-          </ul>
-        </li>
-      </ul>
+      <div class="search-container">
+        <i class="fas fa-search" id="search-icon"></i>
+        <input type="search" id="searchInput" placeholder="Buscar produtos...">
+      </div>
+
+      <div class="nav-icons">
+        <!-- Carrinho -->
+        <a href="carrinho.html" class="nav-cart" title="Carrinho">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          <span class="cart-badge">0</span>
+        </a>
+        <!-- Lista de Desejos -->
+        <a href="#" title="Lista de Desejos">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21C12 21 3 13.5 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-9 13-9 13z" />
+          </svg>
+        </a>
+        <!-- Notificações -->
+        <a href="#" class="nav-notif" title="Notificações">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+          </svg>
+          <span class="cart-badge notif-badge">3</span>
+        </a>
+        <!-- Entrar -->
+        <a href="#" title="Entrar">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+        </a>
+      </div>
     </nav>
-
-    <!-- Ações Mobile (Hambúrguer + Carrinho) -->
-    <div class="acoes-mobile">
-      <button id="abrir-carrinho" title="Carrinho">
-        <i class="fas fa-shopping-cart"></i>
-        <span id="contador-carrinho"></span>
-      </button>
-      <button class="menu-toggle" id="abrir-menu">&#9776;</button>
-    </div>
   </header>
 
   <!-- Menu Lateral Mobile -->
   <nav id="menu-lateral" class="side-menu">
     <button class="fechar-menu" id="fechar-menu">&times;</button>
-    <a href="index.html">Início</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="contato.html">Contato</a>
+    <div class="menu-section">
+      <h4>Navegação</h4>
+      <a href="index.html"><i class="fas fa-home"></i>Início</a>
+      <a href="#produtos"><i class="fas fa-tshirt"></i>Produtos</a>
+    </div>
+    <div class="contato-section">
+      <h4>Contato</h4>
+      <a href="mailto:closetdajacy@gmail.com"><i class="fas fa-envelope"></i>closetdajacy@gmail.com</a>
+    </div>
+    <div class="social-section">
+      <h4>Redes Sociais</h4>
+      <a href="https://www.instagram.com/closetdajacy_" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+    </div>
   </nav>
 
-  <!-- PRODUTOS -->
-  <section class="produtos">
-    <div class="produto">
-      <img src="./Imagens/vestidofloral.jpg" alt="Vestido Floral" />
-      <h3>Vestido Floral</h3>
-      <p class="descricao">Vestido leve e elegante com estampa floral vibrante.</p>
-      <p>R$ 129,90</p>
-      <button>Comprar</button>
-    </div>
-    <div class="produto">
-      <img src="./Imagens/calçawidecargojeans.jpg" alt="Calça Wide Cargo Jeans" />
-      <h3>Calça Wide Cargo Jeans</h3>
-      <p class="descricao">Calça jeans cargo com modelagem wide leg, moderna e confortável.</p>
-      <p>R$ 89,90</p>
-      <button>Comprar</button>
-    </div>
-    <div class="produto">
-      <img src="./Imagens/body.jpg" alt="Body" />
-      <h3>Body</h3>
-      <p class="descricao">Body versátil em tecido macio, ideal para diversas combinações.</p>
-      <p>R$ 49,90</p>
-      <button>Comprar</button>
-    </div>
-    <div class="produto">
-      <img src="./Imagens/blazerdealfaiataria.avif" alt="Blazer de Alfaiataria" />
-      <h3>Blazer de Alfaiataria</h3>
-      <p class="descricao">Blazer clássico de alfaiataria, peça chave para um look sofisticado.</p>
-      <p>R$ 64,90</p>
-      <button>Comprar</button>
+  <section class="">
+    <div class="">
     </div>
   </section>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">✦ Nova Coleção 2026</p>
+      <h1 class="hero-title">Eleve seu<br><em>Estilo</em></h1>
+      <p class="hero-sub">Peças selecionadas com cuidado para a mulher que valoriza elegância e autenticidade.</p>
+      <a href="#produtos" class="btn-primary">Ver Coleção</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-bg"><img src="./Imagens/Conjunto Alfaiataria Colete com 4 Botões e Short com Bolso.png"
+          alt="Nova Coleção" class="hero-img"></div>
+
+      <div class="hero-badge">
+        <span class="hero-badge-pct">New</span>
+        <span class="hero-badge-text">Coleção</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section class="produtos-section" id="produtos">
+    <div class="section-header">
+      <p class="section-eyebrow">✦ Seleção especial</p>
+      <h2 class="section-title">Produtos em Destaque</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="produtos">
+
+      <div class="produto" data-product-name="Vestido Floral" data-initial-stock="99">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/vestidofloral.jpg" alt="Vestido Floral" />
+          <span class="produto-tag">Novo</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Vestidos</p>
+          <h3>Vestido Floral</h3>
+          <p class="descricao">Vestido leve e elegante com estampa floral vibrante.</p>
+          <p class="preco"><b>R$ 129,90</b> <span class="stock-status"></span></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/calçawidecargojeans.jpg" alt="Calça Wide Cargo Jeans" />
+          <span class="produto-tag esgotado-tag">Esgotado</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Calças</p>
+          <h3>Calça Wide Cargo Jeans</h3>
+          <p class="descricao">Calça jeans cargo com modelagem wide leg, moderna e confortável.</p>
+          <p class="preco"><b>R$ 89,90</b> <span style="color:#b0a0a2;font-size:12px">(Esgotado)</span></p>
+          <button disabled
+            style="background:#e8dede;cursor:not-allowed;color:#b0a0a2;border:none;padding:10px;border-radius:2px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;width:100%">Indisponível</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/body.jpg" alt="Body" />
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Bodies</p>
+          <h3>Body</h3>
+          <p class="descricao">Body versátil em tecido macio, ideal para diversas combinações.</p>
+          <p class="preco"><b>R$ 49,90</b></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/blazerdealfaiataria.avif" alt="Blazer de Alfaiataria" />
+          <span class="produto-tag destaque-tag">Destaque</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Blazers</p>
+          <h3>Blazer de Alfaiataria</h3>
+          <p class="descricao">Blazer clássico de alfaiataria, peça chave para um look sofisticado.</p>
+          <p class="preco"><b>R$ 64,90</b></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto" data-product-name="Vestido Floral" data-initial-stock="99">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/vestidofloral.jpg" alt="Vestido Floral" />
+          <span class="produto-tag">Novo</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Vestidos</p>
+          <h3>Vestido Floral</h3>
+          <p class="descricao">Vestido leve e elegante com estampa floral vibrante.</p>
+          <p class="preco"><b>R$ 129,90</b> <span class="stock-status"></span></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/calçawidecargojeans.jpg" alt="Calça Wide Cargo Jeans" />
+          <span class="produto-tag esgotado-tag">Esgotado</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Calças</p>
+          <h3>Calça Wide Cargo Jeans</h3>
+          <p class="descricao">Calça jeans cargo com modelagem wide leg, moderna e confortável.</p>
+          <p class="preco"><b>R$ 89,90</b> <span style="color:#b0a0a2;font-size:12px">(Esgotado)</span></p>
+          <button disabled
+            style="background:#e8dede;cursor:not-allowed;color:#b0a0a2;border:none;padding:10px;border-radius:2px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;width:100%">Indisponível</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/body.jpg" alt="Body" />
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Bodies</p>
+          <h3>Body</h3>
+          <p class="descricao">Body versátil em tecido macio, ideal para diversas combinações.</p>
+          <p class="preco"><b>R$ 49,90</b></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/blazerdealfaiataria.avif" alt="Blazer de Alfaiataria" />
+          <span class="produto-tag destaque-tag">Destaque</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Blazers</p>
+          <h3>Blazer de Alfaiataria</h3>
+          <p class="descricao">Blazer clássico de alfaiataria, peça chave para um look sofisticado.</p>
+          <p class="preco"><b>R$ 64,90</b></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto" data-product-name="Vestido Floral" data-initial-stock="99">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/vestidofloral.jpg" alt="Vestido Floral" />
+          <span class="produto-tag">Novo</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Vestidos</p>
+          <h3>Vestido Floral</h3>
+          <p class="descricao">Vestido leve e elegante com estampa floral vibrante.</p>
+          <p class="preco"><b>R$ 129,90</b> <span class="stock-status"></span></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/calçawidecargojeans.jpg" alt="Calça Wide Cargo Jeans" />
+          <span class="produto-tag esgotado-tag">Esgotado</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Calças</p>
+          <h3>Calça Wide Cargo Jeans</h3>
+          <p class="descricao">Calça jeans cargo com modelagem wide leg, moderna e confortável.</p>
+          <p class="preco"><b>R$ 89,90</b> <span style="color:#b0a0a2;font-size:12px">(Esgotado)</span></p>
+          <button disabled
+            style="background:#e8dede;cursor:not-allowed;color:#b0a0a2;border:none;padding:10px;border-radius:2px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;width:100%">Indisponível</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/body.jpg" alt="Body" />
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Bodies</p>
+          <h3>Body</h3>
+          <p class="descricao">Body versátil em tecido macio, ideal para diversas combinações.</p>
+          <p class="preco"><b>R$ 49,90</b></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+      <div class="produto">
+        <div class="produto-img-wrap">
+          <img src="./Imagens/blazerdealfaiataria.avif" alt="Blazer de Alfaiataria" />
+          <span class="produto-tag destaque-tag">Destaque</span>
+        </div>
+        <div class="produto-body">
+          <p class="produto-cat">Blazers</p>
+          <h3>Blazer de Alfaiataria</h3>
+          <p class="descricao">Blazer clássico de alfaiataria, peça chave para um look sofisticado.</p>
+          <p class="preco"><b>R$ 64,90</b></p>
+          <button class="comprar-btn">Comprar</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="noResults" style="display:none" class="no-results">
+      <i class="fas fa-search"></i>
+      <p>Nenhum produto encontrado para sua busca.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">✦ Explore</p>
+      <h2 class="section-title">Nossas Categorias</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="categories fade-in">
+      <div class="categories-grid">
+
+        <div class="cat-card">
+          <div class="cat-bg cat-bg-1"></div>
+          <img src="Imagens/vestidocaidoombroso.jpg" alt="Produto" class="cat-img">
+          <div class="cat-overlay"></div>
+          <div class="cat-content">
+            <p class="cat-label">Destaque</p>
+            <h3 class="cat-name">Vestidos<br>Elegantes</h3>
+            <a href="#" class="cat-link">Explorar →</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-bg cat-bg-2"></div>
+          <img src="Imagens/BlazerBackCoffee.jpg" alt="Produto" class="cat-img">
+          <div class="cat-overlay"></div>
+          <div class="cat-content">
+            <p class="cat-label">Temporada</p>
+            <h3 class="cat-name">Blazers</h3>
+            <a href="#" class="cat-link">Ver tudo →</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-bg cat-bg-3"></div>
+          <img src="Imagens/BolsaBrancaFashion.jpg" alt="Produto" class="cat-img">
+          <div class="cat-overlay"></div>
+          <div class="cat-content">
+            <p class="cat-label">Tendência</p>
+            <h3 class="cat-name">Bolsas</h3>
+            <a href="#" class="cat-link">Descobrir →</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-bg cat-bg-4"></div>
+          <img src="Imagens/Top BizChic Borgonha com Botões Metálicos Decorativos, Decote Halter e Fenda Lateral..jpg"
+            alt="Produto" class="cat-img">
+          <div class="cat-overlay"></div>
+          <div class="cat-content">
+            <p class="cat-label">Casual</p>
+            <h3 class="cat-name">Malhas</h3>
+            <a href="#" class="cat-link">Ver mais →</a>
+          </div>
+        </div>
+
+        <div class="cat-card">
+          <div class="cat-bg cat-bg-5"></div>
+          <img src="Imagens/MacaquinhoAlfaiataria.jpg" alt="Produto" class="cat-img">
+          <div class="cat-overlay"></div>
+          <div class="cat-content">
+            <p class="cat-label">Novo</p>
+            <h3 class="cat-name">Macaquinho</h3>
+            <a href="#" class="cat-link">Explorar →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER CTA WHATSAPP -->
+  <!--- <div class="banner-cta">
+    <div class="banner-cta-content">
+      <p class="banner-eyebrow">✦ Atendimento personalizado</p>
+      <h2 class="banner-title">Fale com a <em>Jacy</em></h2>
+      <p class="banner-sub">Tire dúvidas, peça indicações de looks ou finalize sua compra direto pelo WhatsApp.</p>
+      <a href="https://wa.me/5584997050106" target="_blank" class="btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+      </a>
+    </div>
+  </div> --->
 
   <!-- RODAPÉ -->
   <footer>
     <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo">
+          <a href="./index.html"><img src="./Imagens/logoclosetjacy.png" alt="Logo Closet da Jacy" /></a>
+        </div>
+        <p class="footer-desc">Não é só roupa, é identidade 💎</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/closetdajacy_" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
       <div class="footer-section">
         <h4>Atendimento</h4>
-        <p>📞 (84) 9 9705-0106</p>
         <p>✉️ closetdajacy@gmail.com</p>
       </div>
 
@@ -108,22 +404,16 @@
         <a href="#">Trocas e Devoluções</a>
         <a href="#">Prazo de Entrega</a>
       </div>
-
-      <div class="footer-section">
-        <h4>Redes Sociais</h4>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/jacy_oliveira_makeup" target="_blank" class="Instagram"
-            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
     </div>
 
     <div class="footer-bottom">
-      &copy; 2024 Closet da Jacy. Todos os direitos reservados. Desenvolvido pela HORBYON.
+      &copy; 2025 Closet da Jacy. Todos os direitos reservados. Desenvolvido pela
+      <a href="https://www.instagram.com/horbyon" target="_blank"
+        style="color:rgba(255,255,255,0.5);text-decoration:none"> HORBYON.</a>
     </div>
   </footer>
 
-  <!-- SCRIPT DO MENU E CARRINHO -->
+  <!-- SCRIPTS (intocados) -->
   <script src="script.js"></script>
   <script src="carrinho.js"></script>
 
