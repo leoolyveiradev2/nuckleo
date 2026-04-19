@@ -1,10 +1,10 @@
-# 🧠 Nuckleo — Your Second Brain
+# Nuckleo — Your Second Brain
 
 > Organize, armazene e compartilhe seu conhecimento com uma plataforma SaaS moderna, escalável e visualmente refinada.
 
 ---
 
-## 🎨 Paleta de Cores
+## Paleta de Cores
 
 | Nome         | HEX       | RGB               |
 |--------------|-----------|-------------------|
@@ -14,7 +14,7 @@
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 nuckleo/
@@ -82,7 +82,7 @@ nuckleo/
         └── tokenUtils.js    # JWT generate + build response
 ```
 
-## 🎯 Funcionalidades do Site
+## Funcionalidades do Site
 
 ### Frontend
 - [x] Autenticação (email/senha + Google OAuth)
@@ -121,7 +121,7 @@ nuckleo/
 
 ---
 
-## ⚙️ Decisões de Arquitetura
+## Decisões de Arquitetura
 
 | Decisão | Motivo |
 |---------|--------|
