@@ -3,12 +3,12 @@
 /**
  * Item Model
  * An Item belongs to a Space and can be:
- *   - note      → rich text content
- *   - link      → external URL with preview metadata
- *   - file      → uploaded file (PDF, image, code)
- *   - code      → code snippet with language
+ *   - note      (rich text content)
+ *   - link      (external URL with preview metadata)
+ *   - file      (uploaded file: PDF, image, code)
+ *   - code      (code snippet with language)
  *
- * Type-specific data is stored in a `meta` sub-document (avoid deep nesting).
+ * Type-specific data is stored in a meta sub-document.
  */
 const itemSchema = new mongoose.Schema(
     {
