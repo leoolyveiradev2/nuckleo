@@ -1,4 +1,4 @@
-// Modeloconst mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 /**
  * Item Model
