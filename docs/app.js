@@ -313,6 +313,7 @@ const App = (() => {
     });
 
     document.getElementById('btn-logout')?.addEventListener('click', logout);
+    document.getElementById('user-chip')?.addEventListener('click', () => ProfileMenu.toggle());
     document.getElementById('btn-new-space-main')?.addEventListener('click', () => Modal.openNewSpace());
     document.getElementById('btn-new-space-sidebar')?.addEventListener('click', () => Modal.openNewSpace());
 
