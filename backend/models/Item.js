@@ -127,4 +127,4 @@ itemSchema.index({
 });
 
 const Item = mongoose.model('Item', itemSchema);
-module.exports = Item; de item(note / link / file / code) - Placeholder
+module.exports = Item;
