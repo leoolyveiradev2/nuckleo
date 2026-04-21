@@ -65,6 +65,8 @@
     color: var(--text-primary);
 }
 
+
+
 .sidebar__search {
     padding: 0 var(--space-4) var(--space-4);
     flex-shrink: 0;
