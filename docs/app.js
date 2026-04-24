@@ -434,7 +434,7 @@ const DrawerMenu = (() => {
           <span class="drawer-item__icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
           </span>
-          <span>Sair da conta</span>
+          <span>Sair</span>
         </a>
       </nav>
 
@@ -936,7 +936,7 @@ const Modal = (() => {
       case 'link':
         contentHtml = `
           <a href="${item.meta?.url}" target="_blank" rel="noopener" class="item-detail-link-card">
-            🔗 <span style="flex:1;overflow:hidden;text-overflow:ellipsis;">${item.meta?.url}</span>
+            <span style="flex:1;overflow:hidden;text-overflow:ellipsis;">${item.meta?.url}</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>`;
         break;
@@ -950,7 +950,7 @@ const Modal = (() => {
       case 'file':
         contentHtml = `
           <div style="display:flex;align-items:center;gap:12px;padding:20px;background:var(--input-bg);border-radius:var(--radius-lg);">
-            <span style="font-size:2rem;">📄</span>
+            <span style="font-size:2rem;"></span>
             <div>
               <div style="font-weight:600;">${item.meta?.fileName}</div>
               <div style="font-size:var(--text-xs);color:var(--text-tertiary);">${Helpers.formatFileSize(item.meta?.fileSize)} · ${item.meta?.mimeType || ''}</div>
@@ -966,7 +966,7 @@ const Modal = (() => {
         <span>·</span>
         <span>${item.viewCount || 0} visualizações</span>
         <span>·</span>
-        <span>${item.visibility === 'public' ? '🌐 Público' : '🔒 Privado'}</span>
+        <span>${item.visibility === 'public' ? 'Público' : 'Privado'}</span>
       </div>
       ${contentHtml}
       ${tagsHtml ? `<div class="item-detail-tags">${tagsHtml}</div>` : ''}`;

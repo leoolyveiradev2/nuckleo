@@ -1,22 +1,22 @@
 /* components/profileMenu.js */
 
 const ProfileMenu = (() => {
-  let _isOpen = false;
+    let _isOpen = false;
 
-  function render(user) {
-    const existing = document.getElementById('profile-menu');
-    if (existing) existing.remove();
+    function render(user) {
+        const existing = document.getElementById('profile-menu');
+        if (existing) existing.remove();
 
-    const menu = document.createElement('div');
-    menu.id = 'profile-menu';
-    menu.className = 'profile-menu';
-    menu.innerHTML = `
+        const menu = document.createElement('div');
+        menu.id = 'profile-menu';
+        menu.className = 'profile-menu';
+        menu.innerHTML = `
       <!-- Header -->
       <div class="profile-menu__header">
         ${user.avatar
-          ? `<img src="${user.avatar}" class="profile-menu__avatar" alt="${user.name}" />`
-          : `<div class="profile-menu__avatar profile-menu__avatar--initials">${Helpers.initials(user.name)}</div>`
-        }
+                ? `<img src="${user.avatar}" class="profile-menu__avatar" alt="${user.name}" />`
+                : `<div class="profile-menu__avatar profile-menu__avatar--initials">${Helpers.initials(user.name)}</div>`
+            }
         <div class="profile-menu__info">
           <span class="profile-menu__name">${user.name}</span>
           <span class="profile-menu__email">${user.email || ''}</span>
@@ -56,80 +56,80 @@ const ProfileMenu = (() => {
       </button>
     `;
 
-    document.body.appendChild(menu);
-    positionMenu();
-    attachMenuListeners();
+        document.body.appendChild(menu);
+        positionMenu();
+        attachMenuListeners();
 
-    requestAnimationFrame(() => menu.classList.add('open'));
-  }
-
-  function positionMenu() {
-    const chip    = document.getElementById('user-chip');
-    const menu    = document.getElementById('profile-menu');
-    if (!chip || !menu) return;
-
-    const rect = chip.getBoundingClientRect();
-    menu.style.bottom = `${window.innerHeight - rect.top + 8}px`;
-    menu.style.left   = `${rect.left}px`;
-  }
-
-  function attachMenuListeners() {
-    document.getElementById('pm-edit-profile')?.addEventListener('click', () => {
-      close();
-      Modal.openEditProfile();
-    });
-
-    document.getElementById('pm-preferences')?.addEventListener('click', () => {
-      close();
-      const panel = document.getElementById('theme-panel');
-      const shell = document.getElementById('main-app');
-      panel.classList.add('open');
-      shell.classList.add('theme-panel-open');
-    });
-
-    document.getElementById('pm-logout')?.addEventListener('click', () => {
-      close();
-      if (confirm('Deseja sair da conta?')) {
-        localStorage.removeItem('nuckleo_token');
-        State.set('user', null);
-        document.getElementById('auth-screen').style.display = 'flex';
-        document.getElementById('main-app').style.display = 'none';
-        Helpers.toast('Até logo! 👋');
-      }
-    });
-
-    // Close on outside click
-    setTimeout(() => {
-      document.addEventListener('click', onOutsideClick);
-    }, 50);
-  }
-
-  function onOutsideClick(e) {
-    const menu = document.getElementById('profile-menu');
-    const chip = document.getElementById('user-chip');
-    if (menu && !menu.contains(e.target) && !chip.contains(e.target)) {
-      close();
+        requestAnimationFrame(() => menu.classList.add('open'));
     }
-  }
 
-  function close() {
-    const menu = document.getElementById('profile-menu');
-    if (menu) {
-      menu.classList.remove('open');
-      setTimeout(() => menu.remove(), 200);
+    function positionMenu() {
+        const chip = document.getElementById('user-chip');
+        const menu = document.getElementById('profile-menu');
+        if (!chip || !menu) return;
+
+        const rect = chip.getBoundingClientRect();
+        menu.style.bottom = `${window.innerHeight - rect.top + 8}px`;
+        menu.style.left = `${rect.left}px`;
     }
-    document.removeEventListener('click', onOutsideClick);
-    _isOpen = false;
-  }
 
-  function toggle() {
-    if (_isOpen) {
-      close();
-    } else {
-      _isOpen = true;
-      render(State.get('user') || {});
+    function attachMenuListeners() {
+        document.getElementById('pm-edit-profile')?.addEventListener('click', () => {
+            close();
+            Modal.openEditProfile();
+        });
+
+        document.getElementById('pm-preferences')?.addEventListener('click', () => {
+            close();
+            const panel = document.getElementById('theme-panel');
+            const shell = document.getElementById('main-app');
+            panel.classList.add('open');
+            shell.classList.add('theme-panel-open');
+        });
+
+        document.getElementById('pm-logout')?.addEventListener('click', () => {
+            close();
+            if (confirm('Deseja sair da conta?')) {
+                localStorage.removeItem('nuckleo_token');
+                State.set('user', null);
+                document.getElementById('auth-screen').style.display = 'flex';
+                document.getElementById('main-app').style.display = 'none';
+                Helpers.toast('Até logo! 👋');
+            }
+        });
+
+        // Close on outside click
+        setTimeout(() => {
+            document.addEventListener('click', onOutsideClick);
+        }, 50);
     }
-  }
 
-  return { toggle, close };
+    function onOutsideClick(e) {
+        const menu = document.getElementById('profile-menu');
+        const chip = document.getElementById('user-chip');
+        if (menu && !menu.contains(e.target) && !chip.contains(e.target)) {
+            close();
+        }
+    }
+
+    function close() {
+        const menu = document.getElementById('profile-menu');
+        if (menu) {
+            menu.classList.remove('open');
+            setTimeout(() => menu.remove(), 200);
+        }
+        document.removeEventListener('click', onOutsideClick);
+        _isOpen = false;
+    }
+
+    function toggle() {
+        if (_isOpen) {
+            close();
+        } else {
+            _isOpen = true;
+            render(State.get('user') || {});
+        }
+    }
+
+    return { toggle, close };
 })();
