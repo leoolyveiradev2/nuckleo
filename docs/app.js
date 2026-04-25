@@ -42,31 +42,22 @@ const App = (() => {
   function updateUserUI(user) {
     const nameEl = document.getElementById('user-name');
     const handleEl = document.getElementById('user-handle');
-    const avatarEl = document.getElementById('user-avatar');
+    const avatarImg = document.getElementById('user-avatar');
+    const avatarInit = document.getElementById('user-avatar-initials');
 
     if (nameEl) nameEl.textContent = user.name || '—';
     if (handleEl) handleEl.textContent = user.username ? `@${user.username}` : user.email || '—';
 
-    if (avatarEl) {
-      if (user.avatar) {
-        avatarEl.src = user.avatar;
-        avatarEl.style.display = 'block';
-      } else {
-        avatarEl.style.display = 'none';
-        const parent = avatarEl.parentElement;
-        let init = parent.querySelector('.avatar-initials');
-        if (!init) {
-          init = document.createElement('div');
-          init.className = 'avatar-initials user-chip__avatar';
-          init.style.cssText = 'display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem;background:var(--accent-muted);color:var(--accent);';
-          parent.insertBefore(init, avatarEl);
-        }
-        init.textContent = Helpers.initials(user.name);
-      }
+    if (user.avatar) {
+      if (avatarImg) { avatarImg.src = user.avatar; avatarImg.style.display = 'block'; }
+      if (avatarInit) avatarInit.style.display = 'none';
+    } else {
+      if (avatarImg) avatarImg.style.display = 'none';
+      if (avatarInit) { avatarInit.style.display = 'flex'; avatarInit.textContent = Helpers.initials(user.name || '?'); }
     }
 
-    // Update drawer avatar too
-    DrawerMenu.updateUser(user);
+    DrawerMenu?.updateUser?.(user);
+    ProfileFlyout?.render?.();
   }
 
   async function checkAuth() {
