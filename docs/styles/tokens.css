@@ -12,10 +12,10 @@
   --wintergreen-dark: #5A9D96;
 
   /* ── Accent (can be overridden by user prefs) ── */
-  --accent:       #81BFB7;
-  --accent-light: #C6E6E3;
-  --accent-muted: rgba(129, 191, 183, 0.18);
-  --accent-hover: #5A9D96;
+  --accent:       #A7F24A;
+  --accent-light: #C9FF7A;
+  --accent-muted: rgba(167, 242, 74, 0.15);
+  --accent-hover: #8BE032;
 
   /* ── Typography ────────────────────────────────── */
   --font-display: 'Syne', sans-serif;
@@ -66,9 +66,9 @@
 
 /* ── Dark Theme (default) ────────────────────────── */
 [data-theme="dark"] {
-  --bg-base:      #0E1117;
-  --bg-elevated:  #161C27;
-  --bg-overlay:   #1E2535;
+  --bg-base:      #0D0D0D;
+  --bg-elevated:  #1A1A1A;
+  --bg-overlay:   #111111;
   --bg-hover:     rgba(255,255,255,0.04);
   --bg-active:    rgba(129,191,183,0.12);
 
@@ -85,10 +85,10 @@
   --shadow-lg:  0 12px 48px rgba(0,0,0,0.6);
   --shadow-xl:  0 24px 80px rgba(0,0,0,0.7);
 
-  --sidebar-bg:  #111620;
-  --card-bg:     #161C27;
-  --modal-bg:    #161C27;
-  --input-bg:    rgba(255,255,255,0.05);
+  --sidebar-bg:  #0A0A0A;
+  --card-bg:     #1A1A1A;
+  --modal-bg:    #1A1A1A;
+  --input-bg:    #111111;
 
   /* Scrollbar */
   --sb-thumb: rgba(129,191,183,0.25);
