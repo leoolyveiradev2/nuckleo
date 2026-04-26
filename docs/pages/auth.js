@@ -105,28 +105,22 @@ const AuthPage = (() => {
 
   /* ── Google OAuth ─────────────────────────────────── */
   function initGoogleOAuth() {
-    if (!window.google || !google.accounts) {
-      console.error('Google SDK não carregado');
-      return;
-    }
+    waitForGoogleSDK(() => {
+      google.accounts.id.initialize({
+        client_id: "748847692403-qbpqn7lmj1aic4adf0aspvu4ei5puhcc.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
 
-    google.accounts.id.initialize({
-      client_id: "748847692403-qbpqn7lmj1aic4adf0aspvu4ei5puhcc.apps.googleusercontent.com",
-      callback: handleCredentialResponse
-    });
+      console.log("Google SDK carregado com sucesso 🚀");
 
-    ['btn-google-login', 'btn-google-register'].forEach(id => {
-      const btn = document.getElementById(id);
+      // BOTÃO LOGIN
+      btnLogin?.addEventListener('click', () => {
+        google.accounts.id.prompt();
+      });
 
-      btn?.addEventListener('click', () => {
-        google.accounts.id.prompt((notification) => {
-          if (notification.isNotDisplayed()) {
-            console.warn(
-              'Google não exibido:',
-              notification.getNotDisplayedReason()
-            );
-          }
-        });
+      // BOTÃO REGISTER
+      btnRegister?.addEventListener('click', () => {
+        google.accounts.id.prompt();
       });
     });
   }
