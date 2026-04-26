@@ -1,6 +1,8 @@
 // Auth controller - Placeholder
 const authService = require('../services/authService');
 const { createError } = require('../utils/errorUtils');
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 /**
  * Auth Controller — thin layer, delegates all logic to AuthService.
@@ -35,15 +37,19 @@ const googleOAuth = async (req, res, next) => {
     if (!credential) return next(createError('Google credential required', 400));
 
     // Verify token with Google
-    const googleRes = await fetch(
-      `https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`
-    );
-    if (!googleRes.ok) return next(createError('Invalid Google token', 401));
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
 
-    const profile = await googleRes.json();
-    if (profile.aud !== process.env.GOOGLE_CLIENT_ID) {
-      return next(createError('Token audience mismatch', 401));
-    }
+    const payload = ticket.getPayload();
+
+    const profile = {
+      sub: payload.sub,
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture,
+    };
 
     const result = await authService.findOrCreateOAuthUser({
       provider: 'google',

@@ -705,6 +705,17 @@
   <script src="./app.js"></script>
   <script src="./components/profileMenu.js"></script>
   <script src="./components/profileFlyout.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "748847692403-qbpqn7lmj1aic4adf0aspvu4ei5puhcc.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
+    };
+
+  </script>
 
 </body>
 
