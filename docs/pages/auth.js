@@ -105,23 +105,27 @@ const AuthPage = (() => {
 
   /* ── Google OAuth ─────────────────────────────────── */
   function initGoogleOAuth() {
-    waitForGoogleSDK(() => {
-      google.accounts.id.initialize({
-        client_id: "748847692403-qbpqn7lmj1aic4adf0aspvu4ei5puhcc.apps.googleusercontent.com",
-        callback: handleCredentialResponse
-      });
+    if (!window.google || !google.accounts || !google.accounts.id) {
+      console.error("Google SDK NÃO carregou ❌");
+      return;
+    }
 
-      console.log("Google SDK carregado com sucesso 🚀");
+    google.accounts.id.initialize({
+      client_id: "748847692403-qbpqn7lmj1aic4adf0aspvu4ei5puhcc.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
 
-      // BOTÃO LOGIN
-      btnLogin?.addEventListener('click', () => {
-        google.accounts.id.prompt();
-      });
+    console.log("Google SDK carregado com sucesso 🚀");
 
-      // BOTÃO REGISTER
-      btnRegister?.addEventListener('click', () => {
-        google.accounts.id.prompt();
-      });
+    const btnLogin = document.getElementById('btn-google-login');
+    const btnRegister = document.getElementById('btn-google-register');
+
+    btnLogin?.addEventListener('click', () => {
+      google.accounts.id.prompt();
+    });
+
+    btnRegister?.addEventListener('click', () => {
+      google.accounts.id.prompt();
     });
   }
 
