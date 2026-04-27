@@ -1,9 +1,10 @@
-/* Reset e base - Placeholder */
 /* ═══════════════════════════════════════════════════
-   NUCKLEO — Reset & Base
+   NUCKLEO — Reset & Base v2
    ═══════════════════════════════════════════════════ */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,34 +29,68 @@ body {
   height: 100vh;
   width: 100vw;
   transition: background-color var(--duration-normal) var(--ease-out),
-              color var(--duration-normal) var(--ease-out);
+    color var(--duration-normal) var(--ease-out);
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--sb-track); }
-::-webkit-scrollbar-thumb { background: var(--sb-thumb); border-radius: var(--radius-full); }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
 
-/* Links */
-a { color: inherit; text-decoration: none; cursor: pointer; }
+::-webkit-scrollbar-track {
+  background: var(--sb-track);
+}
 
-/* Images */
-img { max-width: 100%; display: block; }
+::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb);
+  border-radius: var(--radius-full);
+}
 
-/* Buttons */
-button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
-/* Inputs */
-input, textarea, select { font-family: var(--font-body); font-size: var(--text-base); }
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); line-height: 1.2; }
+img {
+  max-width: 100%;
+  display: block;
+}
 
-/* Selection */
-::selection { background: var(--accent-muted); color: var(--text-primary); }
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
 
-/* Focus visible */
+input,
+textarea,
+select {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+::selection {
+  background: var(--accent-muted);
+  color: var(--text-primary);
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

@@ -4,26 +4,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nuckleo — Your Second Brain</title>
-  <meta name="description" content="Organize, armazene e compartilhe seu conhecimento com Nuckleo." />
+  <title>Nuckleo</title>
+  <meta name="description" content="Núcleo conectado. Tudo o que importa, organizado e em fluxo." />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
-    rel="stylesheet" />
-
-  <!-- Styles -->
+  <!-- Styles (tokens já importa Space Grotesk via @import) -->
   <link rel="stylesheet" href="./styles/tokens.css" />
   <link rel="stylesheet" href="./styles/reset.css" />
-  <link rel="stylesheet" href="./styles/style.css" />
+  <link rel="stylesheet" href="./styles/layout.css" />
   <link rel="stylesheet" href="./styles/components.css" />
   <link rel="stylesheet" href="./styles/animations.css" />
   <link rel="stylesheet" href="./styles/responsive.css" />
 
   <!-- Favicon -->
-  <link rel="icon" href="./photos/logofaviconNuckleo.svg" type="image/svg+xml" />
+  <link rel="icon" href="./photos/faviconNuckleo.svg" type="image/svg+xml" />
 </head>
 
 <body>
@@ -106,7 +99,7 @@
         <!-- Topo: Logo + Avatar -->
         <div class="sidebar__top">
           <div class="sidebar__brand">
-            <img src="./photos/logofaviconNuckleo.svg" alt="Nuckleo" class="sidebar__logo-img"
+            <img src="./photos/faviconNuckleo.svg" alt="Nuckleo" class="sidebar__logo-img"
               onerror="this.style.display='none'" />
             <span class="sidebar__brand-name">Nuckleo</span>
           </div>
@@ -116,73 +109,87 @@
           </button>
         </div>
 
-        <!-- Divisor -->
         <div class="sidebar__divider"></div>
 
-        <!-- Nav items -->
+        <!-- Nav -->
         <nav class="sidebar__nav">
           <a class="nav-item active" data-page="dashboard">
-            <!-- Root icon: círculo com quadrado menor dentro -->
-            <span class="nav-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
-                <rect x="8" y="8" width="8" height="8" rx="1.5" fill="currentColor" />
-              </svg>
-            </span>
-            <span class="nav-item__label">Root</span>
+            <div class="page-header">
+              <div>
+                <h1 class="page-title" id="dashboard-greeting">Olá 👋</h1>
+                <p class="page-subtitle">Tudo organizado e em fluxo.</p>
+              </div>
+              <!-- Barra de busca no centro da header -->
+              <div class="page-header-center">
+                <div class="header-search" id="global-search-trigger">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                  </svg>
+                  <span style="color:var(--text-tertiary);font-size:var(--text-sm);">Buscar...</span>
+                  <kbd>⌘K</kbd>
+                </div>
+              </div>
+              <button class="btn btn--primary" id="btn-new-space-main">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Novo Espaço
+              </button>
+            </div>
           </a>
 
           <a class="nav-item" data-page="spaces">
-            <!-- Ctrl+S icon: 4 bolinhas em grade -->
             <span class="nav-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="8" cy="8" r="3.5" />
-                <circle cx="16" cy="8" r="3.5" />
-                <circle cx="8" cy="16" r="3.5" />
-                <circle cx="16" cy="16" r="3.5" />
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="7.5" cy="7.5" r="3" />
+                <circle cx="16.5" cy="7.5" r="3" />
+                <circle cx="7.5" cy="16.5" r="3" />
+                <circle cx="16.5" cy="16.5" r="3" />
               </svg>
             </span>
             <span class="nav-item__label">Ctrl+S</span>
           </a>
 
           <a class="nav-item" data-page="favorites">
-            <!-- Xodós icon: estrela de 4 pontas -->
             <span class="nav-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                 <path
-                  d="M12 2 C12 2 13.2 8 14.5 9.5 C16 11 22 12 22 12 C22 12 16 13 14.5 14.5 C13.2 16 12 22 12 22 C12 22 10.8 16 9.5 14.5 C8 13 2 12 2 12 C2 12 8 11 9.5 9.5 C10.8 8 12 2 12 2 Z" />
+                  d="M12 2C12 2 13.5 8.5 15 10C16.5 11.5 23 12 23 12C23 12 16.5 12.5 15 14C13.5 15.5 12 22 12 22C12 22 10.5 15.5 9 14C7.5 12.5 1 12 1 12C1 12 7.5 11.5 9 10C10.5 8.5 12 2 12 2Z" />
               </svg>
             </span>
             <span class="nav-item__label">Xodós</span>
           </a>
 
           <a class="nav-item" data-page="friends">
-            <!-- Firma icon: aperto de mão -->
             <span class="nav-item__icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
                 stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 11 L7 13 L3 10 L5 7 L8 8 L11 5 L14 5 L15 6" />
-                <path d="M15 13 L17 11 L21 14 L19 17 L16 16 L13 19 L10 19 L9 18" />
-                <path d="M8 8 L10 10 M11 11 L13 13 M14 14 L16 16" />
-                <path d="M15 6 L17 8 L13 12 L11 10 L14 7" />
+                <path d="M20.5 7.5 L16 12 L12.5 8.5" />
+                <path d="M3.5 7.5 L8 12 L11.5 8.5" />
+                <path d="M12 8.5 L12 18" />
+                <path d="M8 18 L16 18" />
+                <circle cx="20.5" cy="5.5" r="2" />
+                <circle cx="3.5" cy="5.5" r="2" />
+                <circle cx="12" cy="6.5" r="2" />
               </svg>
             </span>
             <span class="nav-item__label">Firma</span>
           </a>
         </nav>
 
-        <!-- Rodapé: Background color -->
+        <!-- Footer: Background color -->
         <div class="sidebar__footer">
-          <div class="sidebar__divider" style="margin-bottom:16px;"></div>
+          <div class="sidebar__divider" style="margin-bottom:14px;"></div>
           <div class="sidebar__bgcolor-row">
             <span class="sidebar__bgcolor-label">Background-color</span>
-            <button id="btn-bgcolor" class="sidebar__bgcolor-btn" title="Mudar cor">
-              <!-- Ícone colorido tipo Apple GameCenter -->
+            <button id="btn-bgcolor" class="sidebar__bgcolor-btn" title="Mudar tema">
               <svg width="28" height="28" viewBox="0 0 28 28">
-                <circle cx="10" cy="10" r="7" fill="#FF5F57" />
-                <circle cx="18" cy="10" r="7" fill="#FFBD2E" />
-                <circle cx="10" cy="18" r="7" fill="#28CA42" />
-                <circle cx="18" cy="18" r="7" fill="#0D72F6" />
+                <circle cx="9.5" cy="9.5" r="6.5" fill="#FF5F57" opacity="0.9" />
+                <circle cx="18.5" cy="9.5" r="6.5" fill="#FFBD2E" opacity="0.9" />
+                <circle cx="9.5" cy="18.5" r="6.5" fill="#28CA42" opacity="0.9" />
+                <circle cx="18.5" cy="18.5" r="6.5" fill="#0D72F6" opacity="0.9" />
               </svg>
             </button>
           </div>
@@ -456,6 +463,40 @@
         </div>
       </aside>
 
+      <nav id="bottom-nav" class="bottom-nav">
+        <a class="bottom-nav__item active" data-page="dashboard">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+            <rect x="8.5" y="8.5" width="7" height="7" rx="1.5" fill="currentColor" />
+          </svg>
+        </a>
+        <a class="bottom-nav__item" data-page="favorites">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C12 2 13.5 8.5 15 10C16.5 11.5 23 12 23 12C23 12 16.5 12.5 15 14C13.5 15.5 12 22 12 22C12 22 10.5 15.5 9 14C7.5 12.5 1 12 1 12C1 12 7.5 11.5 9 10C10.5 8.5 12 2 12 2Z" />
+          </svg>
+        </a>
+        <a class="bottom-nav__item" data-page="friends">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.5 7.5 L16 12 L12.5 8.5" />
+            <path d="M3.5 7.5 L8 12 L11.5 8.5" />
+            <path d="M12 8.5 L12 18" />
+            <path d="M8 18 L16 18" />
+            <circle cx="20.5" cy="5.5" r="2" />
+            <circle cx="3.5" cy="5.5" r="2" />
+            <circle cx="12" cy="6.5" r="2" />
+          </svg>
+        </a>
+        <button id="bottom-nav-profile" class="bottom-nav__item bottom-nav__profile">
+          <img id="bottom-avatar" src="" alt=""
+            style="display:none;width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);" />
+          <div id="bottom-avatar-initials"
+            style="width:28px;height:28px;border-radius:50%;background:var(--accent-muted);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.7rem;border:2px solid var(--accent);">
+            ?</div>
+        </button>
+      </nav>
+
     </div><!-- /main-app -->
 
   </div><!-- /app -->
@@ -704,7 +745,6 @@
   <script src="./pages/favorites.js"></script>
   <script src="./pages/friends.js"></script>
   <script src="./app.js"></script>
-  <script src="./components/profileMenu.js"></script>
   <script src="./components/profileFlyout.js"></script>
 
 </body>

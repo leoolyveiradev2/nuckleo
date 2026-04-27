@@ -1,59 +1,140 @@
-/* Keyframes e stagger - Placeholder */
 /* ═══════════════════════════════════════════════════
-   NUCKLEO — Animations
+   NUCKLEO — Animations v2
    ═══════════════════════════════════════════════════ */
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.94); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  50%       { transform: translateY(-20px) scale(1.02); }
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-16px) scale(1.01);
+  }
 }
 
 @keyframes shimmer {
-  from { background-position: -200% 0; }
-  to   { background-position:  200% 0; }
+  from {
+    background-position: -200% 0;
+  }
+
+  to {
+    background-position: 200% 0;
+  }
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
+@keyframes pulse-green {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--accent-muted);
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+  }
 }
 
-/* Staggered card entrance */
+/* Staggered entrance */
 .spaces-grid .space-card,
-.items-grid  .item-card,
+.items-grid .item-card,
 .friends-grid .user-card {
   animation: fadeInUp var(--duration-normal) var(--ease-out) both;
 }
-.spaces-grid .space-card:nth-child(1), .items-grid .item-card:nth-child(1), .friends-grid .user-card:nth-child(1) { animation-delay: 0ms; }
-.spaces-grid .space-card:nth-child(2), .items-grid .item-card:nth-child(2), .friends-grid .user-card:nth-child(2) { animation-delay: 50ms; }
-.spaces-grid .space-card:nth-child(3), .items-grid .item-card:nth-child(3), .friends-grid .user-card:nth-child(3) { animation-delay: 100ms; }
-.spaces-grid .space-card:nth-child(4), .items-grid .item-card:nth-child(4), .friends-grid .user-card:nth-child(4) { animation-delay: 150ms; }
-.spaces-grid .space-card:nth-child(5), .items-grid .item-card:nth-child(5), .friends-grid .user-card:nth-child(5) { animation-delay: 200ms; }
-.spaces-grid .space-card:nth-child(6), .items-grid .item-card:nth-child(6), .friends-grid .user-card:nth-child(6) { animation-delay: 250ms; }
 
-/* Stat cards stagger */
-.stat-card { animation: fadeInUp var(--duration-normal) var(--ease-out) both; }
-.stat-card:nth-child(1) { animation-delay: 60ms; }
-.stat-card:nth-child(2) { animation-delay: 120ms; }
-.stat-card:nth-child(3) { animation-delay: 180ms; }
-.stat-card:nth-child(4) { animation-delay: 240ms; }
+.spaces-grid .space-card:nth-child(1),
+.items-grid .item-card:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.spaces-grid .space-card:nth-child(2),
+.items-grid .item-card:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.spaces-grid .space-card:nth-child(3),
+.items-grid .item-card:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+.spaces-grid .space-card:nth-child(4),
+.items-grid .item-card:nth-child(4) {
+  animation-delay: 120ms;
+}
+
+.spaces-grid .space-card:nth-child(5),
+.items-grid .item-card:nth-child(5) {
+  animation-delay: 160ms;
+}
+
+.spaces-grid .space-card:nth-child(6),
+.items-grid .item-card:nth-child(6) {
+  animation-delay: 200ms;
+}
+
+.stat-card {
+  animation: fadeInUp var(--duration-normal) var(--ease-out) both;
+}
+
+.stat-card:nth-child(1) {
+  animation-delay: 50ms;
+}
+
+.stat-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.stat-card:nth-child(3) {
+  animation-delay: 150ms;
+}
+
+.stat-card:nth-child(4) {
+  animation-delay: 200ms;
+}
