@@ -1,11 +1,18 @@
-# Tarefa: Atualizar caminhos de "/frontend" para "docs"
+# TODO — Refatoração HTML Nuckleo SPA
 
-## 📋 Passos do Plano
-- [ ] 1. Criar/atualizar TODO.md com passos
-- [ ] 2. Editar docs/index.html (substituir /frontend → /docs nos 13 scripts)
-- [ ] 3. Verificar outros arquivos (searches já 0 results)
-- [ ] 4. Atualizar TODO.md com progresso
-- [ ] 5. Testar aplicação (abrir docs/index.html, check Network tab)
 
-## Status: Executando...
+- [x] Análise completa do codebase (index.html, app.js, state.js, api.js, helpers.js, all pages, all components, all styles)
+- [x] Plano de refatoração elaborado e aprovado com reforços
+- [ ] Criar TODO.md de acompanhamento
+- [ ] Implementar HTML refatorado completo
+  - [ ] App Shell semântico (ARIA landmarks, roles)
+  - [ ] Router-ready (data-route, data-route-path, params, 404 fallback)
+  - [ ] Estado global ready (data-store-bind, data-store-key)
+  - [ ] Sistema de eventos (data-action, event delegation)
+  - [ ] Performance (lazy loading, modular scripts, critical vs non-critical)
+  - [ ] Componentes (data-component, <template> declarativos, zero IDs)
+  - [ ] Acessibilidade (skip link, aria-*, labels, focus)
+  - [ ] Segurança (comentários sanitização, contenteditable)
+  - [ ] BEM naming, limpeza, comentários arquiteturais
+- [ ] Entregar HTML completo pronto para produção
 

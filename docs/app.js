@@ -97,57 +97,45 @@ const App = (() => {
   }
 
   function applyAccent(color) {
-    if (!/^#[0-9A-Fa-f]{6}$/.test(color)) return;
-    document.documentElement.style.setProperty('--accent', color);
-    document.documentElement.style.setProperty('--accent-light', color + 'CC');
-    document.documentElement.style.setProperty('--accent-muted', color + '22');
-    document.documentElement.style.setProperty('--accent-hover', color + 'DD');
-    document.documentElement.style.setProperty('--border-focus', color + '99');
-    localStorage.setItem('nuckleo_accent', color);
-    State.set('accentColor', color);
-    const hexIn = document.getElementById('custom-color-hex');
-    const picker = document.getElementById('custom-color-picker');
-    if (hexIn) hexIn.value = color;
-    if (picker) picker.value = color;
-    // Update drawer color dot
-    const drawerColorDot = document.getElementById('drawer-color-dot');
-    if (drawerColorDot) drawerColorDot.style.background = color;
+    // 🔒 DESIGN FIXO TEMPORÁRIO
+    return;
   }
 
   function initTheme() {
     applyTheme(State.get('theme'));
-    applyAccent(State.get('accentColor'));
-
-    document.getElementById('btn-open-theme')?.addEventListener('click', () => {
-      const panel = document.getElementById('theme-panel');
-      const shell = document.getElementById('main-app');
-      panel.classList.toggle('open');
-      shell.classList.toggle('theme-panel-open');
-    });
-    document.getElementById('btn-close-theme')?.addEventListener('click', () => {
-      document.getElementById('theme-panel').classList.remove('open');
-      document.getElementById('main-app').classList.remove('theme-panel-open');
-    });
-
-    Helpers.qsa('.theme-opt').forEach(opt => {
-      opt.addEventListener('click', () => applyTheme(opt.dataset.theme));
-    });
-    Helpers.qsa('.accent-swatch').forEach(sw => {
-      sw.addEventListener('click', () => {
-        applyAccent(sw.dataset.color);
-        Helpers.qsa('.accent-swatch').forEach(s => s.classList.remove('active'));
-        sw.classList.add('active');
-      });
-    });
-
-    const picker = document.getElementById('custom-color-picker');
-    const hexIn = document.getElementById('custom-color-hex');
-    picker?.addEventListener('input', () => { if (hexIn) hexIn.value = picker.value; });
-    document.getElementById('btn-apply-color')?.addEventListener('click', () => {
-      if (hexIn) applyAccent(hexIn.value);
-    });
-    hexIn?.addEventListener('keydown', e => { if (e.key === 'Enter') applyAccent(hexIn.value); });
+    // applyAccent(State.get('accentColor')); // desativado
   }
+
+  document.getElementById('btn-open-theme')?.addEventListener('click', () => {
+    const panel = document.getElementById('theme-panel');
+    const shell = document.getElementById('main-app');
+    panel.classList.toggle('open');
+    shell.classList.toggle('theme-panel-open');
+  });
+  document.getElementById('btn-close-theme')?.addEventListener('click', () => {
+    document.getElementById('theme-panel').classList.remove('open');
+    document.getElementById('main-app').classList.remove('theme-panel-open');
+  });
+
+  Helpers.qsa('.theme-opt').forEach(opt => {
+    opt.addEventListener('click', () => applyTheme(opt.dataset.theme));
+  });
+  Helpers.qsa('.accent-swatch').forEach(sw => {
+    sw.addEventListener('click', () => {
+      applyAccent(sw.dataset.color);
+      Helpers.qsa('.accent-swatch').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+    });
+  });
+
+  //const picker = document.getElementById('custom-color-picker');
+  const hexIn = document.getElementById('custom-color-hex');
+  picker?.addEventListener('input', () => { if (hexIn) hexIn.value = picker.value; });
+  // document.getElementById('btn-apply-color')?.addEventListener('click', () => {
+  //   if (hexIn) applyAccent(hexIn.value);
+  // });
+  hexIn?.addEventListener('keydown', e => { if (e.key === 'Enter') applyAccent(hexIn.value); });
+
 
   /* ── Notifications ───────────────────────────────── */
   async function loadNotifications() {
@@ -331,38 +319,37 @@ const App = (() => {
   }
 
   return { init, navigateTo, handleAuthSuccess, applyAccent, logout };
-})();
 
 
-/* ═══════════════════════════════════════════════════
-   Drawer Menu — menu lateral que abre pelo hambúrguer
-   ═══════════════════════════════════════════════════ */
-const DrawerMenu = (() => {
-  let _drawer = null;
-  let _overlay = null;
+  /* ═══════════════════════════════════════════════════
+     Drawer Menu — menu lateral que abre pelo hambúrguer
+     ═══════════════════════════════════════════════════ */
+  const DrawerMenu = (() => {
+    let _drawer = null;
+    let _overlay = null;
 
-  function build() {
-    // Overlay
-    _overlay = document.createElement('div');
-    _overlay.id = 'drawer-overlay';
-    _overlay.style.cssText = `
+    function build() {
+      // Overlay
+      _overlay = document.createElement('div');
+      _overlay.id = 'drawer-overlay';
+      _overlay.style.cssText = `
       position:fixed;inset:0;background:rgba(0,0,0,0.5);
       z-index:149;display:none;backdrop-filter:blur(2px);
     `;
-    _overlay.addEventListener('click', close);
+      _overlay.addEventListener('click', close);
 
-    // Drawer
-    _drawer = document.createElement('div');
-    _drawer.id = 'drawer-menu';
-    _drawer.style.cssText = `
+      // Drawer
+      _drawer = document.createElement('div');
+      _drawer.id = 'drawer-menu';
+      _drawer.style.cssText = `
       position:fixed;top:0;left:0;bottom:0;width:280px;
-      background:var(--sidebar-bg);border-right:1px solid var(--border);
+      background:var(--bg-surface);border-right:1px solid var(--border);
       z-index:150;transform:translateX(-100%);
       transition:transform 0.25s cubic-bezier(0.16,1,0.3,1);
       display:flex;flex-direction:column;overflow:hidden;
     `;
 
-    _drawer.innerHTML = `
+      _drawer.innerHTML = `
       <!-- Header -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 20px 16px;">
         <div style="display:flex;align-items:center;gap:12px;">
@@ -443,9 +430,9 @@ const DrawerMenu = (() => {
       </div>
     `;
 
-    // CSS for drawer items
-    const style = document.createElement('style');
-    style.textContent = `
+      // CSS for drawer items
+      const style = document.createElement('style');
+      style.textContent = `
       .drawer-item {
         display:flex;align-items:center;gap:14px;
         padding:12px 16px;border-radius:12px;
@@ -459,229 +446,229 @@ const DrawerMenu = (() => {
       .drawer-item--danger:hover { background:rgba(240,98,146,0.1) !important; }
       .drawer-item__icon { width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
     `;
-    document.head.appendChild(style);
+      document.head.appendChild(style);
 
-    document.body.appendChild(_overlay);
-    document.body.appendChild(_drawer);
+      document.body.appendChild(_overlay);
+      document.body.appendChild(_drawer);
 
-    attachListeners();
-  }
-
-  function attachListeners() {
-    // Nav items
-    _drawer.querySelectorAll('[data-page]').forEach(item => {
-      item.addEventListener('click', () => {
-        App.navigateTo(item.dataset.page);
-        // Update active
-        _drawer.querySelectorAll('.drawer-item').forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-      });
-    });
-
-    // Edit profile
-    document.getElementById('drawer-edit-profile')?.addEventListener('click', () => {
-      close();
-      Modal.openEditProfile();
-    });
-
-    // Theme
-    document.getElementById('drawer-theme')?.addEventListener('click', () => {
-      close();
-      const panel = document.getElementById('theme-panel');
-      const shell = document.getElementById('main-app');
-      panel.classList.add('open');
-      shell.classList.add('theme-panel-open');
-    });
-
-    // Logout
-    document.getElementById('drawer-logout')?.addEventListener('click', () => {
-      close();
-      if (confirm('Deseja sair da conta?')) App.logout();
-    });
-
-    // Color dot — abre theme panel
-    document.getElementById('drawer-color-dot')?.addEventListener('click', () => {
-      close();
-      const panel = document.getElementById('theme-panel');
-      const shell = document.getElementById('main-app');
-      panel.classList.add('open');
-      shell.classList.add('theme-panel-open');
-    });
-
-    // Avatar btn no drawer — abre edit profile
-    document.getElementById('drawer-avatar-btn')?.addEventListener('click', () => {
-      close();
-      Modal.openEditProfile();
-    });
-  }
-
-  function updateUser(user) {
-    if (!_drawer) return;
-    const avatarBtn = document.getElementById('drawer-avatar-btn');
-    if (!avatarBtn) return;
-    if (user?.avatar) {
-      avatarBtn.innerHTML = `<img src="${user.avatar}" style="width:100%;height:100%;object-fit:cover;" />`;
-    } else {
-      avatarBtn.textContent = Helpers.initials(user?.name || '?');
+      attachListeners();
     }
-  }
 
-  function open() {
-    if (!_drawer) return;
-    _overlay.style.display = 'block';
-    _drawer.style.transform = 'translateX(0)';
-  }
-
-  function close() {
-    if (!_drawer) return;
-    _overlay.style.display = 'none';
-    _drawer.style.transform = 'translateX(-100%)';
-  }
-
-  function toggle() {
-    if (!_drawer) return;
-    const isOpen = _drawer.style.transform === 'translateX(0px)' || _drawer.style.transform === 'translateX(0)';
-    isOpen ? close() : open();
-  }
-
-  function init() {
-    build();
-    // Sync color dot
-    const dot = document.getElementById('drawer-color-dot');
-    if (dot) dot.style.background = State.get('accentColor') || '#81BFB7';
-  }
-
-  return { init, open, close, toggle, updateUser };
-})();
-
-
-/* ═══════════════════════════════════════════════════
-   Modal Manager
-   ═══════════════════════════════════════════════════ */
-const Modal = (() => {
-  function open(id) { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
-  function close(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
-  function closeAll() { Helpers.qsa('.modal-overlay').forEach(m => m.style.display = 'none'); }
-
-  /* ── New Space ───────────────────────────────────── */
-  let _selectedEmoji = '📁';
-  let _selectedColor = '#81BFB7';
-  let _spaceVisibility = 'private';
-
-  function openNewSpace() {
-    // Reset form
-    const title = document.querySelector('#modal-new-space .modal__title');
-    if (title) title.textContent = 'Criar novo espaço';
-    const btn = document.getElementById('btn-create-space');
-    if (btn) { btn.textContent = 'Criar espaço'; btn._editId = null; }
-    document.getElementById('space-name').value = '';
-    document.getElementById('space-desc').value = '';
-    document.getElementById('space-tags').value = '';
-    _selectedEmoji = '📁';
-    _selectedColor = '#81BFB7';
-    _spaceVisibility = 'private';
-    open('modal-new-space');
-  }
-
-  function initNewSpace() {
-    Helpers.qsa('.emoji-opt', document.getElementById('modal-new-space')).forEach(opt => {
-      opt.addEventListener('click', () => {
-        Helpers.qsa('.emoji-opt').forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        _selectedEmoji = opt.dataset.emoji;
+    function attachListeners() {
+      // Nav items
+      _drawer.querySelectorAll('[data-page]').forEach(item => {
+        item.addEventListener('click', () => {
+          App.navigateTo(item.dataset.page);
+          // Update active
+          _drawer.querySelectorAll('.drawer-item').forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        });
       });
-    });
 
-    Helpers.qsa('.color-dot', document.getElementById('modal-new-space')).forEach(dot => {
-      dot.addEventListener('click', () => {
-        Helpers.qsa('.color-dot').forEach(d => d.classList.remove('selected'));
-        dot.classList.add('selected');
-        _selectedColor = dot.dataset.color;
+      // Edit profile
+      document.getElementById('drawer-edit-profile')?.addEventListener('click', () => {
+        close();
+        Modal.openEditProfile();
       });
-    });
 
-    const newSpaceModal = document.getElementById('modal-new-space');
-    newSpaceModal?.querySelectorAll('.toggle-opt').forEach(opt => {
-      opt.addEventListener('click', () => {
-        newSpaceModal.querySelectorAll('.toggle-opt').forEach(o => o.classList.remove('active'));
-        opt.classList.add('active');
-        _spaceVisibility = opt.dataset.val;
+      // Theme
+      document.getElementById('drawer-theme')?.addEventListener('click', () => {
+        close();
+        const panel = document.getElementById('theme-panel');
+        const shell = document.getElementById('main-app');
+        panel.classList.add('open');
+        shell.classList.add('theme-panel-open');
       });
-    });
 
-    document.getElementById('btn-create-space')?.addEventListener('click', async () => {
+      // Logout
+      document.getElementById('drawer-logout')?.addEventListener('click', () => {
+        close();
+        if (confirm('Deseja sair da conta?')) App.logout();
+      });
+
+      // Color dot — abre theme panel
+      document.getElementById('drawer-color-dot')?.addEventListener('click', () => {
+        close();
+        const panel = document.getElementById('theme-panel');
+        const shell = document.getElementById('main-app');
+        panel.classList.add('open');
+        shell.classList.add('theme-panel-open');
+      });
+
+      // Avatar btn no drawer — abre edit profile
+      document.getElementById('drawer-avatar-btn')?.addEventListener('click', () => {
+        close();
+        Modal.openEditProfile();
+      });
+    }
+
+    function updateUser(user) {
+      if (!_drawer) return;
+      const avatarBtn = document.getElementById('drawer-avatar-btn');
+      if (!avatarBtn) return;
+      if (user?.avatar) {
+        avatarBtn.innerHTML = `<img src="${user.avatar}" style="width:100%;height:100%;object-fit:cover;" />`;
+      } else {
+        avatarBtn.textContent = Helpers.initials(user?.name || '?');
+      }
+    }
+
+    function open() {
+      if (!_drawer) return;
+      _overlay.style.display = 'block';
+      _drawer.style.transform = 'translateX(0)';
+    }
+
+    function close() {
+      if (!_drawer) return;
+      _overlay.style.display = 'none';
+      _drawer.style.transform = 'translateX(-100%)';
+    }
+
+    function toggle() {
+      if (!_drawer) return;
+      const isOpen = _drawer.style.transform === 'translateX(0px)' || _drawer.style.transform === 'translateX(0)';
+      isOpen ? close() : open();
+    }
+
+    function init() {
+      build();
+      // Sync color dot
+      const dot = document.getElementById('drawer-color-dot');
+      if (dot) dot.style.background = 'var(--accent)';
+    }
+
+    return { init, open, close, toggle, updateUser };
+  })();
+
+
+  /* ═══════════════════════════════════════════════════
+     Modal Manager
+     ═══════════════════════════════════════════════════ */
+  const Modal = (() => {
+    function open(id) { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
+    function close(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
+    function closeAll() { Helpers.qsa('.modal-overlay').forEach(m => m.style.display = 'none'); }
+
+    /* ── New Space ───────────────────────────────────── */
+    let _selectedEmoji = '📁';
+    let _selectedColor = '#81BFB7';
+    let _spaceVisibility = 'private';
+
+    function openNewSpace() {
+      // Reset form
+      const title = document.querySelector('#modal-new-space .modal__title');
+      if (title) title.textContent = 'Criar novo espaço';
       const btn = document.getElementById('btn-create-space');
-      const name = document.getElementById('space-name').value.trim();
-      const desc = document.getElementById('space-desc').value.trim();
-      const tagsRaw = document.getElementById('space-tags').value.trim();
-      if (!name) return Helpers.toast('Nome é obrigatório', 'error');
+      if (btn) { btn.textContent = 'Criar espaço'; btn._editId = null; }
+      document.getElementById('space-name').value = '';
+      document.getElementById('space-desc').value = '';
+      document.getElementById('space-tags').value = '';
+      _selectedEmoji = '📁';
+      _selectedColor = '#81BFB7';
+      _spaceVisibility = 'private';
+      open('modal-new-space');
+    }
 
-      try {
-        // Edit mode
-        if (btn._editId) {
-          await api.spaces.update(btn._editId, {
+    function initNewSpace() {
+      Helpers.qsa('.emoji-opt', document.getElementById('modal-new-space')).forEach(opt => {
+        opt.addEventListener('click', () => {
+          Helpers.qsa('.emoji-opt').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          _selectedEmoji = opt.dataset.emoji;
+        });
+      });
+
+      Helpers.qsa('.color-dot', document.getElementById('modal-new-space')).forEach(dot => {
+        dot.addEventListener('click', () => {
+          Helpers.qsa('.color-dot').forEach(d => d.classList.remove('selected'));
+          dot.classList.add('selected');
+          _selectedColor = dot.dataset.color;
+        });
+      });
+
+      const newSpaceModal = document.getElementById('modal-new-space');
+      newSpaceModal?.querySelectorAll('.toggle-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          newSpaceModal.querySelectorAll('.toggle-opt').forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          _spaceVisibility = opt.dataset.val;
+        });
+      });
+
+      document.getElementById('btn-create-space')?.addEventListener('click', async () => {
+        const btn = document.getElementById('btn-create-space');
+        const name = document.getElementById('space-name').value.trim();
+        const desc = document.getElementById('space-desc').value.trim();
+        const tagsRaw = document.getElementById('space-tags').value.trim();
+        if (!name) return Helpers.toast('Nome é obrigatório', 'error');
+
+        try {
+          // Edit mode
+          if (btn._editId) {
+            await api.spaces.update(btn._editId, {
+              name, description: desc,
+              icon: _selectedEmoji, coverColor: _selectedColor,
+              visibility: _spaceVisibility,
+              tags: Helpers.parseTags(tagsRaw),
+            });
+            close('modal-new-space');
+            Helpers.toast('Espaço atualizado! ✨');
+            const spaces = await api.spaces.list();
+            State.set('spaces', spaces.data?.spaces || []);
+            SpacesPage.updateSidebarSpaces(spaces.data?.spaces || []);
+            SpaceDetailPage.reload();
+            return;
+          }
+
+          const res = await api.spaces.create({
             name, description: desc,
             icon: _selectedEmoji, coverColor: _selectedColor,
             visibility: _spaceVisibility,
             tags: Helpers.parseTags(tagsRaw),
           });
           close('modal-new-space');
-          Helpers.toast('Espaço atualizado! ✨');
+          Helpers.toast('Espaço criado! ✨');
           const spaces = await api.spaces.list();
           State.set('spaces', spaces.data?.spaces || []);
           SpacesPage.updateSidebarSpaces(spaces.data?.spaces || []);
-          SpaceDetailPage.reload();
-          return;
+          SpaceDetailPage.open(res.data._id || res.data.id);
+        } catch (err) {
+          Helpers.toast(err.message || 'Erro ao salvar espaço', 'error');
         }
+      });
+    }
 
-        const res = await api.spaces.create({
-          name, description: desc,
-          icon: _selectedEmoji, coverColor: _selectedColor,
-          visibility: _spaceVisibility,
-          tags: Helpers.parseTags(tagsRaw),
-        });
-        close('modal-new-space');
-        Helpers.toast('Espaço criado! ✨');
-        const spaces = await api.spaces.list();
-        State.set('spaces', spaces.data?.spaces || []);
-        SpacesPage.updateSidebarSpaces(spaces.data?.spaces || []);
-        SpaceDetailPage.open(res.data._id || res.data.id);
-      } catch (err) {
-        Helpers.toast(err.message || 'Erro ao salvar espaço', 'error');
-      }
-    });
-  }
+    function openEditSpace(space) {
+      document.getElementById('space-name').value = space.name || '';
+      document.getElementById('space-desc').value = space.description || '';
+      document.getElementById('space-tags').value = Helpers.tagsToString(space.tags);
+      _selectedEmoji = space.icon || '📁';
+      _selectedColor = space.coverColor || '#81BFB7';
+      _spaceVisibility = space.visibility || 'private';
 
-  function openEditSpace(space) {
-    document.getElementById('space-name').value = space.name || '';
-    document.getElementById('space-desc').value = space.description || '';
-    document.getElementById('space-tags').value = Helpers.tagsToString(space.tags);
-    _selectedEmoji = space.icon || '📁';
-    _selectedColor = space.coverColor || '#81BFB7';
-    _spaceVisibility = space.visibility || 'private';
+      const title = document.querySelector('#modal-new-space .modal__title');
+      if (title) title.textContent = 'Editar espaço';
 
-    const title = document.querySelector('#modal-new-space .modal__title');
-    if (title) title.textContent = 'Editar espaço';
+      const createBtn = document.getElementById('btn-create-space');
+      if (createBtn) { createBtn.textContent = 'Salvar alterações'; createBtn._editId = space._id || space.id; }
 
-    const createBtn = document.getElementById('btn-create-space');
-    if (createBtn) { createBtn.textContent = 'Salvar alterações'; createBtn._editId = space._id || space.id; }
+      open('modal-new-space');
+    }
 
-    open('modal-new-space');
-  }
+    /* ── Edit Profile ────────────────────────────────── */
+    function openEditProfile() {
+      const user = State.get('user');
+      if (!user) return;
 
-  /* ── Edit Profile ────────────────────────────────── */
-  function openEditProfile() {
-    const user = State.get('user');
-    if (!user) return;
-
-    // Check if modal exists, create if not
-    let modal = document.getElementById('modal-edit-profile');
-    if (!modal) {
-      modal = document.createElement('div');
-      modal.id = 'modal-edit-profile';
-      modal.className = 'modal-overlay';
-      modal.style.display = 'none';
-      modal.innerHTML = `
+      // Check if modal exists, create if not
+      let modal = document.getElementById('modal-edit-profile');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modal-edit-profile';
+        modal.className = 'modal-overlay';
+        modal.style.display = 'none';
+        modal.innerHTML = `
         <div class="modal">
           <div class="modal__header">
             <h2 class="modal__title">Editar perfil</h2>
@@ -716,230 +703,230 @@ const Modal = (() => {
             <button class="btn btn--primary" id="btn-save-profile">Salvar</button>
           </div>
         </div>`;
-      document.body.appendChild(modal);
+        document.body.appendChild(modal);
 
-      // Close handlers
-      modal.querySelectorAll('.modal-close').forEach(btn => {
-        btn.addEventListener('click', () => { modal.style.display = 'none'; });
-      });
-      modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+        // Close handlers
+        modal.querySelectorAll('.modal-close').forEach(btn => {
+          btn.addEventListener('click', () => { modal.style.display = 'none'; });
+        });
+        modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 
-      // Save
-      document.getElementById('btn-save-profile')?.addEventListener('click', async () => {
-        const name = document.getElementById('profile-name').value.trim();
-        const username = document.getElementById('profile-username').value.trim().replace('@', '');
-        const bio = document.getElementById('profile-bio').value.trim();
-        const website = document.getElementById('profile-website').value.trim();
-        const avatar = document.getElementById('profile-avatar').value.trim();
+        // Save
+        document.getElementById('btn-save-profile')?.addEventListener('click', async () => {
+          const name = document.getElementById('profile-name').value.trim();
+          const username = document.getElementById('profile-username').value.trim().replace('@', '');
+          const bio = document.getElementById('profile-bio').value.trim();
+          const website = document.getElementById('profile-website').value.trim();
+          const avatar = document.getElementById('profile-avatar').value.trim();
 
-        if (!name) return Helpers.toast('Nome é obrigatório', 'error');
+          if (!name) return Helpers.toast('Nome é obrigatório', 'error');
 
-        try {
-          const res = await api.users.updateProfile({ name, username, bio, website, avatar });
-          State.set('user', { ...State.get('user'), ...res.data });
-          App.updateUserUI ? App.updateUserUI(res.data) : null;
-          // Update UI
-          const nameEl = document.getElementById('user-name');
-          const handleEl = document.getElementById('user-handle');
-          if (nameEl) nameEl.textContent = res.data.name || name;
-          if (handleEl) handleEl.textContent = username ? `@${username}` : res.data.email || '';
-          modal.style.display = 'none';
-          Helpers.toast('Perfil atualizado! ✅');
-        } catch (err) {
-          Helpers.toast(err.message || 'Erro ao salvar perfil', 'error');
-        }
-      });
+          try {
+            const res = await api.users.updateProfile({ name, username, bio, website, avatar });
+            State.set('user', { ...State.get('user'), ...res.data });
+            App.updateUserUI ? App.updateUserUI(res.data) : null;
+            // Update UI
+            const nameEl = document.getElementById('user-name');
+            const handleEl = document.getElementById('user-handle');
+            if (nameEl) nameEl.textContent = res.data.name || name;
+            if (handleEl) handleEl.textContent = username ? `@${username}` : res.data.email || '';
+            modal.style.display = 'none';
+            Helpers.toast('Perfil atualizado! ✅');
+          } catch (err) {
+            Helpers.toast(err.message || 'Erro ao salvar perfil', 'error');
+          }
+        });
+      }
+
+      // Prefill
+      document.getElementById('profile-name').value = user.name || '';
+      document.getElementById('profile-username').value = user.username || '';
+      document.getElementById('profile-bio').value = user.bio || '';
+      document.getElementById('profile-website').value = user.website || '';
+      document.getElementById('profile-avatar').value = user.avatar || '';
+
+      modal.style.display = 'flex';
     }
 
-    // Prefill
-    document.getElementById('profile-name').value = user.name || '';
-    document.getElementById('profile-username').value = user.username || '';
-    document.getElementById('profile-bio').value = user.bio || '';
-    document.getElementById('profile-website').value = user.website || '';
-    document.getElementById('profile-avatar').value = user.avatar || '';
+    /* ── New Item ────────────────────────────────────── */
+    let _itemType = 'note';
+    let _itemVisibility = 'private';
+    let _selectedFile = null;
 
-    modal.style.display = 'flex';
-  }
+    function openNewItem() {
+      // Reset form completamente
+      _itemType = 'note';
+      _itemVisibility = 'private';
+      _selectedFile = null;
 
-  /* ── New Item ────────────────────────────────────── */
-  let _itemType = 'note';
-  let _itemVisibility = 'private';
-  let _selectedFile = null;
+      document.getElementById('item-title').value = '';
+      document.getElementById('note-editor').innerHTML = '';
+      document.getElementById('item-url').value = '';
+      document.getElementById('item-code').value = '';
+      document.getElementById('item-tags').value = '';
+      document.getElementById('item-lang').value = 'javascript';
 
-  function openNewItem() {
-    // Reset form completamente
-    _itemType = 'note';
-    _itemVisibility = 'private';
-    _selectedFile = null;
+      // Reset tabs
+      Helpers.qsa('.item-type-tab').forEach(t => t.classList.toggle('active', t.dataset.type === 'note'));
+      Helpers.qsa('.item-fields').forEach(f => f.style.display = 'none');
+      const noteFields = document.getElementById('item-fields-note');
+      if (noteFields) noteFields.style.display = 'block';
 
-    document.getElementById('item-title').value = '';
-    document.getElementById('note-editor').innerHTML = '';
-    document.getElementById('item-url').value = '';
-    document.getElementById('item-code').value = '';
-    document.getElementById('item-tags').value = '';
-    document.getElementById('item-lang').value = 'javascript';
-
-    // Reset tabs
-    Helpers.qsa('.item-type-tab').forEach(t => t.classList.toggle('active', t.dataset.type === 'note'));
-    Helpers.qsa('.item-fields').forEach(f => f.style.display = 'none');
-    const noteFields = document.getElementById('item-fields-note');
-    if (noteFields) noteFields.style.display = 'block';
-
-    // Reset visibility
-    const itemModal = document.getElementById('modal-new-item');
-    itemModal?.querySelectorAll('.toggle-opt').forEach(o => {
-      o.classList.toggle('active', o.dataset.val === 'private');
-    });
-
-    // Reset file upload
-    const uploadArea = document.getElementById('upload-area');
-    const filePreview = document.getElementById('file-preview');
-    if (uploadArea) uploadArea.style.display = 'flex';
-    if (filePreview) filePreview.style.display = 'none';
-
-    open('modal-new-item');
-  }
-
-  function initNewItem() {
-    Helpers.qsa('.item-type-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        Helpers.qsa('.item-type-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        _itemType = tab.dataset.type;
-        Helpers.qsa('.item-fields').forEach(f => f.style.display = 'none');
-        const fieldsEl = document.getElementById(`item-fields-${_itemType}`);
-        if (fieldsEl) fieldsEl.style.display = 'block';
+      // Reset visibility
+      const itemModal = document.getElementById('modal-new-item');
+      itemModal?.querySelectorAll('.toggle-opt').forEach(o => {
+        o.classList.toggle('active', o.dataset.val === 'private');
       });
-    });
 
-    const itemModal = document.getElementById('modal-new-item');
-    itemModal?.querySelectorAll('.toggle-opt').forEach(opt => {
-      opt.addEventListener('click', () => {
-        itemModal.querySelectorAll('.toggle-opt').forEach(o => o.classList.remove('active'));
-        opt.classList.add('active');
-        _itemVisibility = opt.dataset.val;
+      // Reset file upload
+      const uploadArea = document.getElementById('upload-area');
+      const filePreview = document.getElementById('file-preview');
+      if (uploadArea) uploadArea.style.display = 'flex';
+      if (filePreview) filePreview.style.display = 'none';
+
+      open('modal-new-item');
+    }
+
+    function initNewItem() {
+      Helpers.qsa('.item-type-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          Helpers.qsa('.item-type-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          _itemType = tab.dataset.type;
+          Helpers.qsa('.item-fields').forEach(f => f.style.display = 'none');
+          const fieldsEl = document.getElementById(`item-fields-${_itemType}`);
+          if (fieldsEl) fieldsEl.style.display = 'block';
+        });
       });
-    });
 
-    const uploadArea = document.getElementById('upload-area');
-    const fileInput = document.getElementById('file-input');
-    const filePreview = document.getElementById('file-preview');
+      const itemModal = document.getElementById('modal-new-item');
+      itemModal?.querySelectorAll('.toggle-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          itemModal.querySelectorAll('.toggle-opt').forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          _itemVisibility = opt.dataset.val;
+        });
+      });
 
-    uploadArea?.addEventListener('click', () => fileInput?.click());
-    uploadArea?.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
-    uploadArea?.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
-    uploadArea?.addEventListener('drop', e => {
-      e.preventDefault();
-      uploadArea.classList.remove('dragover');
-      const file = e.dataTransfer.files[0];
-      if (file) handleFile(file);
-    });
-    fileInput?.addEventListener('change', () => {
-      if (fileInput.files[0]) handleFile(fileInput.files[0]);
-    });
+      const uploadArea = document.getElementById('upload-area');
+      const fileInput = document.getElementById('file-input');
+      const filePreview = document.getElementById('file-preview');
 
-    function handleFile(file) {
-      _selectedFile = file;
-      uploadArea.style.display = 'none';
-      filePreview.style.display = 'flex';
-      filePreview.innerHTML = `
+      uploadArea?.addEventListener('click', () => fileInput?.click());
+      uploadArea?.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+      uploadArea?.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+      uploadArea?.addEventListener('drop', e => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file) handleFile(file);
+      });
+      fileInput?.addEventListener('change', () => {
+        if (fileInput.files[0]) handleFile(fileInput.files[0]);
+      });
+
+      function handleFile(file) {
+        _selectedFile = file;
+        uploadArea.style.display = 'none';
+        filePreview.style.display = 'flex';
+        filePreview.innerHTML = `
         <span style="font-size:1.5rem;">📄</span>
         <span class="file-preview__name">${file.name}</span>
         <span class="file-preview__size">${Helpers.formatFileSize(file.size)}</span>
         <button class="btn btn--ghost btn--sm" id="btn-clear-file">×</button>`;
-      document.getElementById('btn-clear-file')?.addEventListener('click', () => {
-        _selectedFile = null;
-        uploadArea.style.display = 'flex';
-        filePreview.style.display = 'none';
+        document.getElementById('btn-clear-file')?.addEventListener('click', () => {
+          _selectedFile = null;
+          uploadArea.style.display = 'flex';
+          filePreview.style.display = 'none';
+        });
+      }
+
+      document.getElementById('btn-create-item')?.addEventListener('click', async () => {
+        const space = SpaceDetailPage.getCurrentSpace();
+        if (!space) return Helpers.toast('Abra um espaço primeiro', 'error');
+
+        const title = document.getElementById('item-title').value.trim();
+        if (!title) return Helpers.toast('Título é obrigatório', 'error');
+
+        const tags = Helpers.parseTags(document.getElementById('item-tags').value);
+        const payload = { title, type: _itemType, visibility: _itemVisibility, tags };
+
+        switch (_itemType) {
+          case 'note':
+            payload.content = document.getElementById('note-editor').innerHTML;
+            break;
+          case 'link':
+            payload.meta = { url: document.getElementById('item-url').value.trim() };
+            break;
+          case 'code':
+            payload.meta = {
+              language: document.getElementById('item-lang').value,
+              code: document.getElementById('item-code').value,
+            };
+            break;
+          case 'file':
+            if (!_selectedFile) return Helpers.toast('Selecione um arquivo', 'error');
+            payload.meta = { fileName: _selectedFile.name, fileSize: _selectedFile.size, mimeType: _selectedFile.type };
+            break;
+        }
+
+        try {
+          await api.spaces.addItem(space._id || space.id, payload);
+          close('modal-new-item');
+          Helpers.toast('Item adicionado! 🎉');
+          SpaceDetailPage.reload();
+        } catch (err) {
+          Helpers.toast(err.message || 'Erro ao criar item', 'error');
+        }
       });
     }
 
-    document.getElementById('btn-create-item')?.addEventListener('click', async () => {
-      const space = SpaceDetailPage.getCurrentSpace();
-      if (!space) return Helpers.toast('Abra um espaço primeiro', 'error');
-
-      const title = document.getElementById('item-title').value.trim();
-      if (!title) return Helpers.toast('Título é obrigatório', 'error');
-
-      const tags = Helpers.parseTags(document.getElementById('item-tags').value);
-      const payload = { title, type: _itemType, visibility: _itemVisibility, tags };
-
-      switch (_itemType) {
-        case 'note':
-          payload.content = document.getElementById('note-editor').innerHTML;
-          break;
-        case 'link':
-          payload.meta = { url: document.getElementById('item-url').value.trim() };
-          break;
-        case 'code':
-          payload.meta = {
-            language: document.getElementById('item-lang').value,
-            code: document.getElementById('item-code').value,
-          };
-          break;
-        case 'file':
-          if (!_selectedFile) return Helpers.toast('Selecione um arquivo', 'error');
-          payload.meta = { fileName: _selectedFile.name, fileSize: _selectedFile.size, mimeType: _selectedFile.type };
-          break;
-      }
+    /* ── Item Detail ─────────────────────────────────── */
+    async function openItemDetail(itemId) {
+      open('modal-item-detail');
+      const body = document.getElementById('item-detail-body');
+      body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-secondary);">Carregando...</div>';
 
       try {
-        await api.spaces.addItem(space._id || space.id, payload);
-        close('modal-new-item');
-        Helpers.toast('Item adicionado! 🎉');
-        SpaceDetailPage.reload();
-      } catch (err) {
-        Helpers.toast(err.message || 'Erro ao criar item', 'error');
+        let item = (State.get('currentSpaceItems') || []).find(i => (i._id || i.id) === itemId);
+        if (!item) {
+          const res = await api.items.get(itemId);
+          item = res.data;
+        }
+        renderItemDetail(item);
+      } catch {
+        body.innerHTML = '<p style="color:var(--text-secondary);">Erro ao carregar item.</p>';
       }
-    });
-  }
-
-  /* ── Item Detail ─────────────────────────────────── */
-  async function openItemDetail(itemId) {
-    open('modal-item-detail');
-    const body = document.getElementById('item-detail-body');
-    body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-secondary);">Carregando...</div>';
-
-    try {
-      let item = (State.get('currentSpaceItems') || []).find(i => (i._id || i.id) === itemId);
-      if (!item) {
-        const res = await api.items.get(itemId);
-        item = res.data;
-      }
-      renderItemDetail(item);
-    } catch {
-      body.innerHTML = '<p style="color:var(--text-secondary);">Erro ao carregar item.</p>';
     }
-  }
 
-  function renderItemDetail(item) {
-    const typeBadge = document.getElementById('item-detail-type-badge');
-    if (typeBadge) typeBadge.textContent = `${Helpers.typeIcon(item.type)} ${Helpers.typeLabel(item.type)}`;
+    function renderItemDetail(item) {
+      const typeBadge = document.getElementById('item-detail-type-badge');
+      if (typeBadge) typeBadge.textContent = `${Helpers.typeIcon(item.type)} ${Helpers.typeLabel(item.type)}`;
 
-    const body = document.getElementById('item-detail-body');
-    const tagsHtml = (item.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
+      const body = document.getElementById('item-detail-body');
+      const tagsHtml = (item.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
 
-    let contentHtml = '';
-    switch (item.type) {
-      case 'note':
-        contentHtml = `<div class="item-detail-content">${item.content || '<em style="color:var(--text-tertiary);">Nota vazia</em>'}</div>`;
-        break;
-      case 'link':
-        contentHtml = `
+      let contentHtml = '';
+      switch (item.type) {
+        case 'note':
+          contentHtml = `<div class="item-detail-content">${item.content || '<em style="color:var(--text-tertiary);">Nota vazia</em>'}</div>`;
+          break;
+        case 'link':
+          contentHtml = `
           <a href="${item.meta?.url}" target="_blank" rel="noopener" class="item-detail-link-card">
             <span style="flex:1;overflow:hidden;text-overflow:ellipsis;">${item.meta?.url}</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>`;
-        break;
-      case 'code':
-        contentHtml = `
+          break;
+        case 'code':
+          contentHtml = `
           <div>
             <div style="font-size:var(--text-xs);color:var(--text-tertiary);margin-bottom:8px;">${item.meta?.language || 'code'}</div>
             <pre class="item-detail-code">${item.meta?.code || ''}</pre>
           </div>`;
-        break;
-      case 'file':
-        contentHtml = `
+          break;
+        case 'file':
+          contentHtml = `
           <div style="display:flex;align-items:center;gap:12px;padding:20px;background:var(--input-bg);border-radius:var(--radius-lg);">
             <span style="font-size:2rem;"></span>
             <div>
@@ -947,10 +934,10 @@ const Modal = (() => {
               <div style="font-size:var(--text-xs);color:var(--text-tertiary);">${Helpers.formatFileSize(item.meta?.fileSize)} · ${item.meta?.mimeType || ''}</div>
             </div>
           </div>`;
-        break;
-    }
+          break;
+      }
 
-    body.innerHTML = `
+      body.innerHTML = `
       <h2 class="item-detail-title">${item.title}</h2>
       <div class="item-detail-meta">
         <span>${Helpers.formatDate(item.createdAt)}</span>
@@ -962,72 +949,73 @@ const Modal = (() => {
       ${contentHtml}
       ${tagsHtml ? `<div class="item-detail-tags">${tagsHtml}</div>` : ''}`;
 
-    const favBtn = document.getElementById('btn-item-fav');
-    const pinBtn = document.getElementById('btn-item-pin');
-    const shareBtn = document.getElementById('btn-item-share');
-    const delBtn = document.getElementById('btn-item-delete');
+      const favBtn = document.getElementById('btn-item-fav');
+      const pinBtn = document.getElementById('btn-item-pin');
+      const shareBtn = document.getElementById('btn-item-share');
+      const delBtn = document.getElementById('btn-item-delete');
 
-    if (favBtn) {
-      favBtn.textContent = item.isFavorite ? '⭐ Desfavoritar' : '☆ Favoritar';
-      favBtn.onclick = async () => {
-        await api.items.update(item._id, { isFavorite: !item.isFavorite });
-        item.isFavorite = !item.isFavorite;
+      if (favBtn) {
         favBtn.textContent = item.isFavorite ? '⭐ Desfavoritar' : '☆ Favoritar';
-        Helpers.toast(item.isFavorite ? 'Adicionado aos favoritos ⭐' : 'Removido dos favoritos');
-        SpaceDetailPage.reload();
-      };
-    }
-    if (pinBtn) {
-      pinBtn.textContent = item.isPinned ? '📌 Desafixar' : '📌 Fixar';
-      pinBtn.onclick = async () => {
-        await api.items.update(item._id, { isPinned: !item.isPinned });
-        item.isPinned = !item.isPinned;
+        favBtn.onclick = async () => {
+          await api.items.update(item._id, { isFavorite: !item.isFavorite });
+          item.isFavorite = !item.isFavorite;
+          favBtn.textContent = item.isFavorite ? '⭐ Desfavoritar' : '☆ Favoritar';
+          Helpers.toast(item.isFavorite ? 'Adicionado aos favoritos ⭐' : 'Removido dos favoritos');
+          SpaceDetailPage.reload();
+        };
+      }
+      if (pinBtn) {
         pinBtn.textContent = item.isPinned ? '📌 Desafixar' : '📌 Fixar';
-        Helpers.toast(item.isPinned ? 'Item fixado' : 'Item desafixado');
-        SpaceDetailPage.reload();
-      };
+        pinBtn.onclick = async () => {
+          await api.items.update(item._id, { isPinned: !item.isPinned });
+          item.isPinned = !item.isPinned;
+          pinBtn.textContent = item.isPinned ? '📌 Desafixar' : '📌 Fixar';
+          Helpers.toast(item.isPinned ? 'Item fixado' : 'Item desafixado');
+          SpaceDetailPage.reload();
+        };
+      }
+      if (shareBtn) {
+        shareBtn.onclick = async () => {
+          if (item.visibility !== 'public') { Helpers.toast('Torne o item público para compartilhar', 'error'); return; }
+          if (item.shareToken) await Helpers.copy(`${location.origin}?item=${item.shareToken}`);
+        };
+      }
+      if (delBtn) {
+        delBtn.onclick = async () => {
+          if (!confirm('Deletar este item permanentemente?')) return;
+          await api.items.delete(item._id);
+          close('modal-item-detail');
+          Helpers.toast('Item deletado.');
+          SpaceDetailPage.reload();
+        };
+      }
     }
-    if (shareBtn) {
-      shareBtn.onclick = async () => {
-        if (item.visibility !== 'public') { Helpers.toast('Torne o item público para compartilhar', 'error'); return; }
-        if (item.shareToken) await Helpers.copy(`${location.origin}?item=${item.shareToken}`);
-      };
-    }
-    if (delBtn) {
-      delBtn.onclick = async () => {
-        if (!confirm('Deletar este item permanentemente?')) return;
-        await api.items.delete(item._id);
-        close('modal-item-detail');
-        Helpers.toast('Item deletado.');
-        SpaceDetailPage.reload();
-      };
-    }
-  }
 
-  /* ── Close handlers ──────────────────────────────── */
-  function initCloseHandlers() {
-    Helpers.qsa('.modal-close').forEach(btn => {
-      btn.addEventListener('click', closeAll);
-    });
-    Helpers.qsa('.modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', e => { if (e.target === overlay) closeAll(); });
-    });
-  }
+    /* ── Close handlers ──────────────────────────────── */
+    function initCloseHandlers() {
+      Helpers.qsa('.modal-close').forEach(btn => {
+        btn.addEventListener('click', closeAll);
+      });
+      Helpers.qsa('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeAll(); });
+      });
+    }
 
-  return {
-    init() {
-      initCloseHandlers();
-      initNewSpace();
-      initNewItem();
-    },
-    openNewSpace,
-    openNewItem,
-    openEditSpace,
-    openEditProfile,
-    openItemDetail,
-    closeAll,
-  };
+    return {
+      init() {
+        initCloseHandlers();
+        initNewSpace();
+        initNewItem();
+      },
+      openNewSpace,
+      openNewItem,
+      openEditSpace,
+      openEditProfile,
+      openItemDetail,
+      closeAll,
+    };
+  })();
+
+  /* ── Boot ─────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', () => App.init());
 })();
-
-/* ── Boot ─────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => App.init());
