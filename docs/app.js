@@ -96,46 +96,32 @@ const App = (() => {
     Helpers.qsa('.theme-opt').forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
   }
 
-  function applyAccent(color) {
-    // 🔒 DESIGN FIXO TEMPORÁRIO
-    return;
-  }
-
   function initTheme() {
     applyTheme(State.get('theme'));
-    // applyAccent(State.get('accentColor')); // desativado
-  }
 
-  document.getElementById('btn-open-theme')?.addEventListener('click', () => {
-    const panel = document.getElementById('theme-panel');
-    const shell = document.getElementById('main-app');
-    panel.classList.toggle('open');
-    shell.classList.toggle('theme-panel-open');
-  });
-  document.getElementById('btn-close-theme')?.addEventListener('click', () => {
-    document.getElementById('theme-panel').classList.remove('open');
-    document.getElementById('main-app').classList.remove('theme-panel-open');
-  });
-
-  Helpers.qsa('.theme-opt').forEach(opt => {
-    opt.addEventListener('click', () => applyTheme(opt.dataset.theme));
-  });
-  Helpers.qsa('.accent-swatch').forEach(sw => {
-    sw.addEventListener('click', () => {
-      applyAccent(sw.dataset.color);
-      Helpers.qsa('.accent-swatch').forEach(s => s.classList.remove('active'));
-      sw.classList.add('active');
+    document.getElementById('btn-open-theme')?.addEventListener('click', () => {
+      const panel = document.getElementById('theme-panel');
+      const shell = document.getElementById('main-app');
+      panel?.classList.toggle('open');
+      shell?.classList.toggle('theme-panel-open');
     });
-  });
 
-  //const picker = document.getElementById('custom-color-picker');
-  const hexIn = document.getElementById('custom-color-hex');
-  picker?.addEventListener('input', () => { if (hexIn) hexIn.value = picker.value; });
-  // document.getElementById('btn-apply-color')?.addEventListener('click', () => {
-  //   if (hexIn) applyAccent(hexIn.value);
-  // });
-  hexIn?.addEventListener('keydown', e => { if (e.key === 'Enter') applyAccent(hexIn.value); });
+    document.getElementById('btn-close-theme')?.addEventListener('click', () => {
+      document.getElementById('theme-panel')?.classList.remove('open');
+      document.getElementById('main-app')?.classList.remove('theme-panel-open');
+    });
 
+    Helpers.qsa('.theme-opt').forEach(opt => {
+      opt.addEventListener('click', () => applyTheme(opt.dataset.theme));
+    });
+
+    // Sistema de cor customizável desativado para futura implementação
+    // const picker = document.getElementById('custom-color-picker');
+    // const hexIn  = document.getElementById('custom-color-hex');
+    // picker?.addEventListener('input', () => { hexIn.value = picker.value; });
+    // document.getElementById('btn-apply-color')?.addEventListener('click', () => { applyAccent(hexIn.value); });
+    // hexIn?.addEventListener('keydown', e => { if (e.key === 'Enter') applyAccent(hexIn.value); });
+  }
 
   /* ── Notifications ───────────────────────────────── */
   async function loadNotifications() {
