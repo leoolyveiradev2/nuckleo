@@ -1041,8 +1041,8 @@ select.input {
 }
 
 .auth-tab.active {
-  background: var(--accent);
-  color: var(--text-on-accent);
+  background: #68854873;
+  color: #68854873;
 }
 
 .auth-form {
@@ -1055,8 +1055,8 @@ select.input {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--text-tertiary);
-  font-size: var(--text-xs);
+  color: #68854873;
+  font-size: #ffffff;
 }
 
 .auth-divider::before,
