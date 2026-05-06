@@ -31,10 +31,26 @@ connectDB();
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
+
+// Origens permitidas pelo CORS
+const allowedOrigins = [
+  'https://nuckleo.com.br',
+  'https://www.nuckleo.com.br',
+  'http://localhost:5500',   // Live Server padrão
+  'http://127.0.0.1:5500',  // Live Server alternativo
+  'http://localhost:3000',
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Permite requisições sem origin (ex: Postman, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`Origem não permitida pelo CORS: ${origin}`));
+  },
   credentials: true,
 }));
+
 app.use(compression());
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
@@ -78,9 +94,9 @@ app.use(errorHandler);
 // Start
 // ──────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n🚀 Nuckleo API running on http://localhost:${PORT}`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV}`);
-  console.log(`📦 MongoDB: connecting...\n`);
+  console.log(`\nNuckleo API running on http://localhost:${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(`MongoDB: connecting...\n`);
 });
 
 module.exports = app;
