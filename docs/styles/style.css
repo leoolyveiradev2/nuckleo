@@ -917,8 +917,8 @@
 }
 
 .auth-tab.active {
-    background: #688548;
-    color: #688548;
+    background: var(--accent);
+    color: var(--text-on-accent);
     box-shadow: 0 2px 8px var(--accent-muted);
 }
 

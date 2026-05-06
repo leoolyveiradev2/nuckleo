@@ -1,6 +1,13 @@
 /* ═══════════════════════════════════════════════════
    NUCKLEO — Design Tokens v2
    System Design: Dark minimalista + Verde Nuckleo
+
+   💡 COMO USAR:
+   Cada var() abaixo é um "apelido" para um valor real.
+   Ex: var(--accent) = #A7F24A (o verde do Nuckleo)
+   
+   Para mudar uma cor em TODO o site, basta alterar
+   o valor aqui — sem precisar caçar arquivo por arquivo.
    ═══════════════════════════════════════════════════ */
 
 /* ── Google Font: Space Grotesk ─────────────────── */
@@ -8,138 +15,171 @@
 
 :root {
   /* ── Brand Palette ─────────────────────────────── */
-  --nuckleo-green:      #A7F24A;
-  --nuckleo-green-dark: #7DC235;
-  --nuckleo-green-dim:  rgba(167, 242, 74, 0.12);
-  --nuckleo-green-mid:  rgba(167, 242, 74, 0.25);
+  /* Paleta oficial do Nuckleo — não mude sem intenção */
 
-  --nuckleo-black:      #0D0D0D;
-  --nuckleo-dark:       #1A1A1A;
-  --nuckleo-gray-mid:   #8E8E8E;
-  --nuckleo-white:      #FFFFFF;
+  --nuckleo-green:      #A7F24A; /* Verde principal do Nuckleo */
+  --nuckleo-green-dark: #7DC235; /* Verde mais escuro (hover, destaque) */
+  --nuckleo-green-dim:  rgba(167, 242, 74, 0.12); /* Verde bem transparente (fundos sutis) */
+  --nuckleo-green-mid:  rgba(167, 242, 74, 0.25); /* Verde médio (badges, indicadores) */
 
-  /* ── Accent (fixo no verde) ─────────────────────── */
-  --accent:       #A7F24A;
-  --accent-light: rgba(167, 242, 74, 0.7);
-  --accent-muted: rgba(167, 242, 74, 0.12);
-  --accent-hover: #7DC235;
+  --nuckleo-black:      #0D0D0D; /* Preto profundo (fundo principal) */
+  --nuckleo-dark:       #1A1A1A; /* Cinza escuro (cards, sidebar) */
+  --nuckleo-gray-mid:   #8E8E8E; /* Cinza médio (textos secundários) */
+  --nuckleo-white:      #FFFFFF; /* Branco puro (textos principais) */
+
+  /* ── Accent ─────────────────────────────────────── */
+  /* Cor de destaque usada em botões, bordas ativas,
+     ícones selecionados e elementos interativos */
+
+  --accent:       #A7F24A; /* Verde Nuckleo — cor principal de destaque */
+  --accent-light: rgba(167, 242, 74, 0.7); /* Verde semitransparente (versão suave) */
+  --accent-muted: rgba(167, 242, 74, 0.12); /* Verde quase invisível (fundos de badges/tags) */
+  --accent-hover: #7DC235; /* Verde mais escuro ao passar o mouse */
 
   /* ── Typography ─────────────────────────────────── */
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body:    'Space Grotesk', sans-serif;
+  /* Fontes usadas no projeto */
 
-  --text-xs:   0.70rem;
-  --text-sm:   0.813rem;
-  --text-base: 0.9375rem;
-  --text-lg:   1.0625rem;
-  --text-xl:   1.25rem;
-  --text-2xl:  1.5rem;
-  --text-3xl:  2rem;
-  --text-4xl:  2.625rem;
+  --font-display: 'Space Grotesk', sans-serif; /* Fonte para títulos e logo */
+  --font-body:    'Space Grotesk', sans-serif; /* Fonte para textos e botões */
 
-  --weight-light:   300;
-  --weight-regular: 400;
-  --weight-medium:  500;
-  --weight-semi:    600;
-  --weight-bold:    700;
+  /* Tamanhos de texto (do menor pro maior) */
+  --text-xs:   0.70rem;   /* ~11px — Labels, hints */
+  --text-sm:   0.813rem;  /* ~13px — Textos secundários, botões pequenos */
+  --text-base: 0.9375rem; /* ~15px — Texto padrão do corpo */
+  --text-lg:   1.0625rem; /* ~17px — Subtítulos */
+  --text-xl:   1.25rem;   /* ~20px — Títulos menores */
+  --text-2xl:  1.5rem;    /* ~24px — Títulos de seção */
+  --text-3xl:  2rem;      /* ~32px — Títulos de página */
+  --text-4xl:  2.625rem;  /* ~42px — Título principal (greeting) */
+
+  /* Pesos da fonte */
+  --weight-light:   300; /* Leve */
+  --weight-regular: 400; /* Normal */
+  --weight-medium:  500; /* Médio (padrão dos botões) */
+  --weight-semi:    600; /* Semi-negrito (títulos de seção) */
+  --weight-bold:    700; /* Negrito (títulos principais, logo) */
 
   /* ── Spacing ─────────────────────────────────────── */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
+  /* Espaçamentos padrão — usados em padding e margin */
+
+  --space-1:  0.25rem;  /* 4px */
+  --space-2:  0.5rem;   /* 8px */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-5:  1.25rem;  /* 20px */
+  --space-6:  1.5rem;   /* 24px */
+  --space-8:  2rem;     /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
 
   /* ── Radius ──────────────────────────────────────── */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   14px;
-  --radius-xl:   20px;
-  --radius-full: 9999px;
+  /* Arredondamento de bordas */
+
+  --radius-sm:   6px;    /* Pequeno (badges, tags) */
+  --radius-md:   10px;   /* Médio (inputs, botões) */
+  --radius-lg:   14px;   /* Grande (cards) */
+  --radius-xl:   20px;   /* Extra grande (modais, auth card) */
+  --radius-full: 9999px; /* Círculo / pílula (avatares, chips) */
 
   /* ── Transitions ─────────────────────────────────── */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
-  --duration-fast:   120ms;
-  --duration-normal: 220ms;
-  --duration-slow:   380ms;
+  /* Velocidade e curva das animações */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* Suave ao final (padrão de entrada) */
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);    /* Suave no início (saída) */
+  --duration-fast:   120ms; /* Rápido (hover, clique) */
+  --duration-normal: 220ms; /* Normal (abrir painéis, transições) */
+  --duration-slow:   380ms; /* Lento (animações de entrada de tela) */
 }
 
 /* ══════════════════════════════════════════════════
    DARK THEME (padrão)
+   Cores que mudam dependendo do tema ativo.
+   Quando data-theme="dark" está no <html>, essas
+   variáveis sobrescrevem os valores globais do :root.
    ══════════════════════════════════════════════════ */
 [data-theme="dark"] {
-  --bg-base:      #0D0D0D;
-  --bg-elevated:  #1A1A1A;
-  --bg-overlay:   #222222;
-  --bg-hover:     rgba(255, 255, 255, 0.05);
-  --bg-active:    rgba(167, 242, 74, 0.1);
+  /* Fundos — do mais escuro para o mais claro */
+  --bg-base:      #0D0D0D; /* Fundo principal da página */
+  --bg-elevated:  #1A1A1A; /* Fundo elevado (cards, modais) */
+  --bg-overlay:   #222222; /* Fundo de overlays e tooltips */
+  --bg-hover:     rgba(255, 255, 255, 0.05); /* Fundo ao passar o mouse */
+  --bg-active:    rgba(167, 242, 74, 0.1);   /* Fundo de item ativo/selecionado */
 
-  --border:       rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(167, 242, 74, 0.6);
+  /* Bordas */
+  --border:       rgba(255, 255, 255, 0.08); /* Borda padrão (sutil) */
+  --border-focus: rgba(167, 242, 74, 0.6);   /* Borda ao focar um input */
 
-  --text-primary:   #FFFFFF;
-  --text-secondary: rgba(255, 255, 255, 0.55);
-  --text-tertiary:  rgba(255, 255, 255, 0.28);
-  --text-on-accent: #0D0D0D;
+  /* Textos */
+  --text-primary:   #FFFFFF;                  /* Texto principal (branco) */
+  --text-secondary: rgba(255, 255, 255, 0.55); /* Texto secundário (cinza claro) */
+  --text-tertiary:  rgba(255, 255, 255, 0.28); /* Texto terciário (cinza apagado) */
+  --text-on-accent: #0D0D0D; /* Texto sobre fundo verde (deve ser escuro) */
 
-  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-md:  0 4px 20px rgba(0, 0, 0, 0.6);
-  --shadow-lg:  0 12px 48px rgba(0, 0, 0, 0.7);
-  --shadow-xl:  0 24px 80px rgba(0, 0, 0, 0.8);
-  --shadow-green: 0 0 20px rgba(167, 242, 74, 0.2);
+  /* Sombras */
+  --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.5);   /* Sombra pequena */
+  --shadow-md:    0 4px 20px rgba(0, 0, 0, 0.6);  /* Sombra média */
+  --shadow-lg:    0 12px 48px rgba(0, 0, 0, 0.7); /* Sombra grande */
+  --shadow-xl:    0 24px 80px rgba(0, 0, 0, 0.8); /* Sombra extra grande (modais) */
+  --shadow-green: 0 0 20px rgba(167, 242, 74, 0.2); /* Brilho verde (botão primário) */
 
-  --sidebar-bg:  #111111;
-  --card-bg:     #1A1A1A;
-  --modal-bg:    #1A1A1A;
-  --input-bg:    rgba(255, 255, 255, 0.06);
+  /* Componentes específicos */
+  --sidebar-bg: #111111;  /* Fundo da sidebar e drawer */
+  --card-bg:    #1A1A1A;  /* Fundo dos cards */
+  --modal-bg:   #1A1A1A;  /* Fundo dos modais */
+  --input-bg:   rgba(255, 255, 255, 0.06); /* Fundo dos inputs */
 
-  --sb-thumb: rgba(167, 242, 74, 0.2);
-  --sb-track: rgba(255, 255, 255, 0.03);
+  /* Scrollbar */
+  --sb-thumb: rgba(167, 242, 74, 0.2); /* Cor da barra de scroll */
+  --sb-track: rgba(255, 255, 255, 0.03); /* Trilha da barra de scroll */
 }
 
 /* ══════════════════════════════════════════════════
    LIGHT THEME
-   Minimalista claro — preto sobre branco
-   com verde como único accent
+   Ativado quando data-theme="light" está no <html>.
+   Minimalista claro — preto sobre branco,
+   com verde como único accent.
    ══════════════════════════════════════════════════ */
 [data-theme="light"] {
-  --bg-base:      #F5F5F5;
-  --bg-elevated:  #FFFFFF;
-  --bg-overlay:   #FFFFFF;
-  --bg-hover:     rgba(0, 0, 0, 0.04);
-  --bg-active:    rgba(167, 242, 74, 0.15);
+  /* Fundos */
+  --bg-base:      #F5F5F5; /* Fundo principal (cinza bem claro) */
+  --bg-elevated:  #FFFFFF; /* Fundo elevado (cards, modais) */
+  --bg-overlay:   #FFFFFF; /* Fundo de overlays */
+  --bg-hover:     rgba(0, 0, 0, 0.04); /* Fundo ao passar o mouse */
+  --bg-active:    rgba(167, 242, 74, 0.15); /* Fundo de item ativo */
 
-  --border:       rgba(0, 0, 0, 0.09);
-  --border-focus: rgba(125, 194, 53, 0.7);
+  /* Bordas */
+  --border:       rgba(0, 0, 0, 0.09); /* Borda padrão (sutil, escura) */
+  --border-focus: rgba(125, 194, 53, 0.7); /* Borda ao focar input */
 
-  --text-primary:   #0D0D0D;
-  --text-secondary: rgba(13, 13, 13, 0.55);
-  --text-tertiary:  rgba(13, 13, 13, 0.32);
-  --text-on-accent: #0D0D0D;
+  /* Textos */
+  --text-primary:   #0D0D0D;                  /* Texto principal (preto) */
+  --text-secondary: rgba(13, 13, 13, 0.55);   /* Texto secundário */
+  --text-tertiary:  rgba(13, 13, 13, 0.32);   /* Texto terciário */
+  --text-on-accent: #0D0D0D; /* Texto sobre fundo verde */
 
-  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md:  0 4px 20px rgba(0, 0, 0, 0.1);
-  --shadow-lg:  0 12px 48px rgba(0, 0, 0, 0.12);
-  --shadow-xl:  0 24px 80px rgba(0, 0, 0, 0.15);
+  /* Sombras (mais suaves no light) */
+  --shadow-sm:    0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:    0 4px 20px rgba(0, 0, 0, 0.1);
+  --shadow-lg:    0 12px 48px rgba(0, 0, 0, 0.12);
+  --shadow-xl:    0 24px 80px rgba(0, 0, 0, 0.15);
   --shadow-green: 0 0 20px rgba(125, 194, 53, 0.15);
 
-  --sidebar-bg:  #FFFFFF;
-  --card-bg:     #FFFFFF;
-  --modal-bg:    #FFFFFF;
-  --input-bg:    rgba(0, 0, 0, 0.04);
+  /* Componentes específicos */
+  --sidebar-bg: #FFFFFF;  /* Sidebar branca no light */
+  --card-bg:    #FFFFFF;
+  --modal-bg:   #FFFFFF;
+  --input-bg:   rgba(0, 0, 0, 0.04);
 
+  /* Scrollbar */
   --sb-thumb: rgba(125, 194, 53, 0.35);
   --sb-track: rgba(0, 0, 0, 0.04);
 
-  /* Accent levemente mais escuro no light para contraste */
+  /* Accent levemente mais escuro no light para ter contraste
+     sobre fundo branco (o #A7F24A some no branco) */
   --accent:       #7DC235;
   --accent-light: rgba(125, 194, 53, 0.7);
   --accent-muted: rgba(125, 194, 53, 0.12);
   --accent-hover: #5A9A1E;
 }
+

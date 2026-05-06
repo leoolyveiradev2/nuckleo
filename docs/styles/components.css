@@ -1041,8 +1041,8 @@ select.input {
 }
 
 .auth-tab.active {
-  background: #68854873;
-  color: #68854873;
+  background: var(--accent);
+  color: var(--text-on-accent);
 }
 
 .auth-form {
@@ -1055,8 +1055,8 @@ select.input {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: #68854873;
-  font-size: #ffffff;
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
 }
 
 .auth-divider::before,
@@ -1381,6 +1381,8 @@ select.input {
   text-decoration: none;
   transition: border-color var(--duration-fast);
   margin-bottom: var(--space-4);
+  overflow: hidden;
+  word-break: break-all;
 }
 
 .item-detail-link-card:hover {
@@ -1420,3 +1422,4 @@ select.input {
   align-items: center;
   gap: 4px;
 }
+
