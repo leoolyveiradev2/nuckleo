@@ -972,13 +972,16 @@ select.input {
 .auth-card {
   position: relative;
   z-index: 1;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: rgba(13, 13, 13, 0.65); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); 
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  
   border-radius: var(--radius-xl);
   padding: var(--space-10);
   width: 100%;
   max-width: 420px;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-xl), 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   animation: fadeInUp var(--duration-slow) var(--ease-out) both;
 }
 
@@ -1427,4 +1430,3 @@ select.input {
   align-items: center;
   gap: 4px;
 }
-
