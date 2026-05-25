@@ -38,24 +38,14 @@ const ItemCard = {
     }
 
     return `
-      <div class="item-card" data-item-id="${item._id || item.id}">
-        <div class="item-card__header">
-          <span class="item-card__type-icon">${icon}</span>
-          <div style="flex:1;overflow:hidden;">
-            <div class="item-card__title">${Helpers.truncate(item.title, 80)}</div>
-          </div>
-          <div style="display:flex;gap:4px;align-items:center;">
-            ${pinned}${fav}
-          </div>
+      <div class="item-card recent-item-row" data-item-id="${item._id || item.id}" data-type="${item.type}">
+        <div class="recent-item-icon">${icon}</div>
+        <div class="recent-item-content">
+          <div class="recent-item-title">${Helpers.truncate(item.title, 80)}</div>
+          <div class="recent-item-project" style="color:var(--text-tertiary);font-size:var(--text-xs);">${item.spaceName || 'Sem espaço'}</div>
         </div>
-        ${contentHtml}
-        ${tagsHtml ? `<div class="space-card__tags">${tagsHtml}</div>` : ''}
-        <div class="item-card__footer">
-          <span class="item-card__time">${Helpers.timeAgo(item.updatedAt || item.createdAt)}</span>
-          <span class="space-card__badge ${item.visibility === 'public' ? 'badge--public' : 'badge--private'}">
-            ${item.visibility === 'public' ? '🌐' : '🔒'}
-          </span>
-        </div>
+        <div class="recent-item-badge">${label}</div>
+        <div class="recent-item-time">${Helpers.timeAgo(item.updatedAt || item.createdAt)}</div>
       </div>`;
   },
 

@@ -3,30 +3,17 @@
 
 const DashboardPage = (() => {
   async function load() {
-    // Greeting
+    // Greeting no formato: "Bom dia, Leo!"
     const user = State.get('user');
+    const firstName = user?.name?.split(' ')[0] || '';
     document.getElementById('dashboard-greeting').textContent =
-      `${Helpers.greeting()}, ${user?.name?.split(' ')[0] || ''}`;
+      `${Helpers.greeting()}, ${firstName}!`;
 
-    await Promise.all([loadStats(), loadRecentSpaces(), loadPinnedItems()]);
+    await Promise.all([loadRecentSpaces(), loadRecentItems()]);
   }
 
   async function loadStats() {
-    const spaces = State.get('spaces') || [];
-    document.getElementById('stat-spaces').textContent = spaces.length;
-
-    const itemCount = spaces.reduce((acc, s) => acc + (s.itemCount || 0), 0);
-    document.getElementById('stat-items').textContent = itemCount;
-
-    try {
-      const favRes = await api.items.favorites('limit=1');
-      document.getElementById('stat-favorites').textContent = favRes.data?.total || 0;
-    } catch { document.getElementById('stat-favorites').textContent = 0; }
-
-    try {
-      const friendRes = await api.users.friends();
-      document.getElementById('stat-friends').textContent = friendRes.data?.friends?.length || 0;
-    } catch { document.getElementById('stat-friends').textContent = 0; }
+    // Deprecated - stats section removed from dashboard
   }
 
   async function loadRecentSpaces() {
@@ -51,38 +38,86 @@ const DashboardPage = (() => {
     attachSpaceCardListeners(container);
   }
 
-  async function loadPinnedItems() {
-    const section   = document.getElementById('pinned-section');
-    const container = document.getElementById('pinned-items');
-
-    // Gather pinned items across all spaces
-    const spaces = State.get('spaces') || [];
-    if (!spaces.length) { section.style.display = 'none'; return; }
+  async function loadRecentItems() {
+    const container = document.getElementById('recent-items');
+    if (!container) return;
 
     container.innerHTML = ItemCard.renderSkeleton().repeat(3);
 
     try {
-      // Fetch pinned from first 3 spaces (quick approximation)
+      // Fetch recent items across all spaces
+      const spaces = State.get('spaces') || [];
+      if (!spaces.length) { container.innerHTML = ''; return; }
+
       const results = [];
       for (const space of spaces.slice(0, 5)) {
         try {
-          const res = await api.spaces.items(space._id || space.id, 'limit=10');
-          const pinned = (res.data?.items || []).filter(i => i.isPinned);
-          results.push(...pinned);
-        } catch {}
+          const res = await api.spaces.items(space._id || space.id, 'limit=20&sort=-updatedAt');
+          const items = (res.data?.items || []).map(i => ({
+            ...i,
+            spaceName: space.name
+          }));
+          results.push(...items);
+        } catch { }
       }
 
-      if (!results.length) {
-        section.style.display = 'none';
+      // Sort by date and get top 10
+      results.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+      const topItems = results.slice(0, 10);
+
+      if (!topItems.length) {
+        container.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-tertiary);">Nenhum item recente</div>';
         return;
       }
 
-      section.style.display = 'block';
-      container.innerHTML = results.slice(0, 6).map(i => ItemCard.render(i)).join('');
+      container.innerHTML = topItems.map(i => ItemCard.render(i)).join('');
       attachItemCardListeners(container);
+
+      // Tab filtering
+      const tabs = document.querySelectorAll('.recent-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          const filterType = tab.textContent.trim().toLowerCase();
+          filterRecentItems(topItems, filterType);
+        });
+      });
     } catch {
-      section.style.display = 'none';
+      container.innerHTML = '';
     }
+  }
+
+  function filterRecentItems(items, filterType) {
+    const container = document.getElementById('recent-items');
+    if (!container) return;
+
+    let filtered = items;
+    if (filterType !== 'todos') {
+      const typeMap = {
+        'links': 'link',
+        'textos': 'note',
+        'arquivos': 'file',
+        'códigos': 'code',
+        'imagens': 'image',
+        'pastas': 'folder'
+      };
+      const type = typeMap[filterType];
+      if (type) filtered = items.filter(i => i.type === type);
+    }
+
+    if (!filtered.length) {
+      container.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-tertiary);">Nenhum item neste tipo</div>';
+      return;
+    }
+
+    container.innerHTML = filtered.map(i => ItemCard.render(i)).join('');
+    attachItemCardListeners(container);
+  }
+
+  async function loadPinnedItems() {
+    // Deprecated - moved to loadRecentItems
   }
 
   function attachSpaceCardListeners(container) {

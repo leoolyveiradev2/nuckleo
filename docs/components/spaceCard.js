@@ -13,22 +13,24 @@ const SpaceCard = {
     const pinned = space.isPinned ? '📌' : '';
     const fav = space.isFavorite ? '⭐' : '';
 
+    const collaborators = (space.members || []).slice(0, 3).map(m => 
+      `<img class="space-card__avatar" src="${m.avatar}" alt="${m.name}" title="${m.name}" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--card-bg);margin-left:-8px;object-fit:cover;" />`
+    ).join('');
+
     return `
       <div class="space-card" data-space-id="${space._id || space.id}">
-        <div class="space-card__cover" style="background: ${space.coverColor || '#81BFB7'};">
+        <div class="space-card__cover" style="background: linear-gradient(135deg, ${space.coverColor || '#81BFB7'} 0%, ${space.coverColor || '#81BFB7'}dd 100%);">
           <span class="space-card__icon">${space.icon || '📁'}</span>
-          ${pinned || fav ? `<span style="position:absolute;top:8px;right:10px;z-index:1;font-size:0.75rem;">${pinned}${fav}</span>` : ''}
         </div>
         <div class="space-card__body">
           <div class="space-card__name">${Helpers.truncate(space.name, 50)}</div>
-          ${space.description ? `<div class="space-card__desc">${Helpers.truncate(space.description, 100)}</div>` : ''}
+          <div class="space-card__meta-count">${space.itemCount || 0} item${space.itemCount !== 1 ? 's' : ''}</div>
           ${tagsHtml ? `<div class="space-card__tags">${tagsHtml}</div>` : ''}
         </div>
         <div class="space-card__footer">
-          <span class="space-card__meta">
-            <span>${space.itemCount || 0} itens</span>
-            <span>${Helpers.timeAgo(space.updatedAt || space.createdAt)}</span>
-          </span>
+          <div class="space-card__members" style="display:flex;align-items:center;gap:4px;">
+            ${collaborators}
+          </div>
           ${visibilityBadge}
         </div>
       </div>`;

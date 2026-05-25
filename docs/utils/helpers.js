@@ -111,11 +111,12 @@ const Helpers = {
   },
 
   /* ── Greeting ────────────────────────────────────── */
+  // Retorna apenas a saudação — o nome e "!" são adicionados no dashboard.js
   greeting() {
     const h = new Date().getHours();
-    if (h < 12) return 'Bom dia 🌤️';
-    if (h < 18) return 'Boa tarde ☀️';
-    return 'Boa noite 🌙';
+    if (h < 12) return 'Bom dia';
+    if (h < 18) return 'Boa tarde';
+    return 'Boa noite';
   },
 
   /* ── Empty State ─────────────────────────────────── */
