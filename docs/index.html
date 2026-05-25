@@ -825,6 +825,33 @@
     <script src="./app.js"></script>
     <script src="./components/profileFlyout.js"></script>
 
+    <script>
+      // Função para verificar se o usuário está logado
+      function verificarAutenticacao() {
+        const authScreen = document.getElementById('auth-screen');
+
+        // Procura no navegador se existe um "carimbo" de que o usuário logou
+        // (Pode ser um token, um ID ou uma sessão do Firebase/Supabase se você estiver usando)
+        const usuarioLogado = localStorage.getItem('usuario_logado');
+
+        if (!usuarioLogado) {
+          // Se NÃO está logado: Mostra a tela de login bloqueando tudo
+          authScreen.style.display = 'flex';
+        } else {
+          // Se ESTÁ logado: Deixa a tela de login invisível para liberar a dashboard
+          authScreen.style.display = 'none';
+        }
+      }
+
+      // Executa a checagem assim que a página carrega
+      window.onload = verificarAutenticacao;
+
+      // EXEMPLO: Quando o usuário clicar no botão "Entrar na Plataforma" com sucesso
+      // Você precisará rodar essa linha abaixo no seu código de login:
+      // localStorage.setItem('usuario_logado', 'true');
+      // window.location.reload(); // Recarrega a página para aplicar o acesso
+    </script>
+
 </body>
 
 </html>
