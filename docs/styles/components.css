@@ -919,13 +919,15 @@ select.input {
 /* ── Auth Screen ─────────────────────────────────── */
 .screen {
   display: none;
-  align-index: center;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  position: fixed;
-  inset: 0;
-  z-index: 9999; 
+  width: 100vw;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba(10, 10, 10, 0.5);
   overflow: hidden;
 }
 
@@ -1431,4 +1433,350 @@ select.input {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6); /* Ajustado o padding vertical para 0, deixando a altura ser controlada pelo height */
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border);
+  height: var(--topbar-h); /* Usa os 56px padronizados nos seus design tokens */
+  position: relative;
+  z-index: 10; /* Garante que fique acima do conteúdo ao rolar */
+}
+
+/* Ajuste responsivo para telas menores (Mobile) */
+@media (max-width: 720px) {
+  .top-bar {
+    padding: 0 var(--space-4); /* Reduz o espaçamento lateral em mobile seguindo o padrão do seu responsive.css */
+  }
+}
+
+/* Garante que a logo e os textos alinhem perfeitamente lado a lado */
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 12px);
+}
+
+/* Alinha o nome e o slogan um embaixo do outro */
+.sidebar__brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.1; 
+}
+
+/* Mantém o estilo do seu nome atual (pode ajustar o tamanho se quiser) */
+.sidebar__brand-name {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: var(--weight-bold, 700);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* Estilo do novo slogan minimalista */
+.sidebar__brand-slogan {
+  font-size: 9px; 
+  font-weight: var(--weight-regular, 400);
+  color: var(--text-secondary); 
+  letter-spacing: 0.03em;
+  text-transform: uppercase; 
+  margin-top: 2px; 
+}
+
+/* ═══════════════════════════════════════════════════
+   NUCKLEO — ScreenPerfil Styles
+   ═══════════════════════════════════════════════════ */
+
+.profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+/* Header & Cover */
+.profile-header {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--space-6);
+}
+
+.profile-cover {
+  height: 140px;
+  background: linear-gradient(135deg, var(--accent-muted) 0%, #141414 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-info-bar {
+  display: flex;
+  position: relative;
+  padding: var(--space-6);
+  padding-top: 0;
+  align-items: flex-end;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.profile-avatar-wrapper {
+  margin-top: -60px;
+  z-index: 2;
+}
+
+.profile-avatar-img {
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-md);
+  background: var(--bg-base);
+  border: 3px solid var(--accent);
+  padding: var(--space-2);
+  object-fit: contain;
+  box-shadow: 0 0 15px var(--accent-muted);
+}
+
+.profile-user-details {
+  flex: 1;
+  min-width: 250px;
+  margin-top: var(--space-3);
+}
+
+.profile-name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+
+.profile-tag {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-2);
+}
+
+.profile-bio {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  max-width: 600px;
+}
+
+/* Botão Editar */
+.btn-edit-profile {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.btn-edit-profile:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-muted);
+}
+
+/* Stats Row */
+.profile-stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.profile-stat-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-value {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-top: var(--space-1);
+}
+
+/* Tabs */
+.profile-tabs-nav {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-6);
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Layout Interno das Abas */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-4);
+}
+
+@media (max-width: 768px) {
+  .overview-grid { grid-template-columns: 1fr; }
+}
+
+.overview-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+
+.overview-card h3 {
+  font-size: var(--text-md);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+/* Lista de Atividades */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--surface-3);
+}
+
+.activity-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.activity-details {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.activity-tag {
+  font-size: 10px;
+  color: var(--text-secondary);
+  background: var(--bg-base);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.activity-date {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+/* Barra de progresso do Nível */
+.progress-wrapper {
+  margin-top: var(--space-4);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.progress-bar-container {
+  height: 8px;
+  background: var(--bg-base);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-light);
+}
+
+.status-tip {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  margin-top: var(--space-4);
+  font-style: italic;
+}
+
+/* Conquistas (Badges) */
+.conquistas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.badge-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.badge-card.locked {
+  opacity: 0.4;
+}
+
+.badge-icon {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.badge-card h4 {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.badge-card p {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
 }

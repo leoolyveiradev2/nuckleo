@@ -1,5 +1,3 @@
-/* app.js — Main orchestrator */
-
 /* ═══════════════════════════════════════════════════
    DrawerMenu — definido ANTES do App para estar disponível
    ═══════════════════════════════════════════════════ */
@@ -67,6 +65,13 @@ const DrawerMenu = (() => {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </span>
           <span>Firma</span>
+        </a>
+
+        <a class="drawer-item" data-page="perfil">
+          <span class="drawer-item__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </span>
+          <span>Meu Perfil</span>
         </a>
 
         <div style="height:1px;background:var(--border);margin:12px 8px;"></div>
@@ -205,9 +210,7 @@ const DrawerMenu = (() => {
 })();
 
 
-/* ═══════════════════════════════════════════════════
-   Modal Manager
-   ═══════════════════════════════════════════════════ */
+/* ═══ Modal Manager ═══ */
 const Modal = (() => {
   function open(id) { const m = document.getElementById(id); if (m) m.style.display = 'flex'; }
   function close(id) { const m = document.getElementById(id); if (m) m.style.display = 'none'; }
@@ -671,11 +674,13 @@ const App = (() => {
 
     DrawerMenu.close();
 
+    // TELAS
     switch (page) {
       case 'dashboard': DashboardPage.load(); break;
       case 'spaces': SpacesPage.load(); break;
       case 'favorites': FavoritesPage.load(); break;
       case 'friends': FriendsPage.load(); break;
+      case 'perfil': PerfilPage.load(); break;
     }
   }
 
@@ -981,7 +986,7 @@ const App = (() => {
 
     window.addEventListener('auth:expired', showAuthScreen);
 
-    AuthPage.init();
+    // AuthPage.init();
     SpacesPage.initFilters();
     SpaceDetailPage.init();
     FriendsPage.init();
